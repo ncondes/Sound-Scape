@@ -1,7 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightToBracket, faSliders } from '@fortawesome/free-solid-svg-icons'
+import { openModal } from '../../stores/modal'
+import { useDispatch } from 'react-redux'
 
 export const Header = () => {
+   const dispatch = useDispatch()
+
+   const handleOpen = () => {
+      dispatch(openModal())
+   }
+
    return (
       <header className="bg-gray-700">
          <nav className="container mx-auto flex justify-between items-center py-5 px-4">
@@ -25,7 +33,7 @@ export const Header = () => {
                      </a>
                   </li>
                   <li>
-                     <a href="#" className="px-3 text-white font-semibold">
+                     <a href="#" className="px-3 text-white font-semibold" onClick={handleOpen}>
                         <FontAwesomeIcon
                            className="mx-1"
                            icon={faRightToBracket}
