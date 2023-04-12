@@ -1,13 +1,22 @@
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Login } from './Login'
 import { Register } from './Register'
-import { closeModal} from '../../stores/modal'
-import { useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { closeModal } from '../../stores/modal'
 
 export const AuthModal = () => {
    const dispatch = useDispatch()
-   // True-- > Login / False-- > Register 
-   const [loginModal, setLoginModal] = useState(true); 
+
+   const { isOpen } = useSelector((state) => state.modal)
+
+   const [tab, setTab] = useState('login')
+
+   const handleClose = () => {
+      dispatch(closeModal())
+   }
+
+   if (!isOpen) return
+
    return (
       <div className="fixed z-10 inset-0 overflow-y-auto" id="modal">
          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -24,10 +33,7 @@ export const AuthModal = () => {
                   <div className="flex justify-between items-center pb-4">
                      <p className="text-2xl font-bold">Your Account</p>
                      {/* modal close button */}
-                     <div
-                        className="modal-close cursor-pointer z-50"
-                        onClick={() => dispatch(closeModal())}
-                     >
+                     <div className="modal-close cursor-pointer z-50" onClick={handleClose}>
                         <i className="fas fa-times"></i>
                      </div>
                   </div>
@@ -36,25 +42,30 @@ export const AuthModal = () => {
                   <ul className="flex flex-wrap mb-4">
                      <li className="flex-auto text-center">
                         <a
-                           className="block rounded py-3 px-4 transition"
+                           className={`block rounded py-3 px-4 transition
+                              ${tab === 'login' ? 'hover:text-white text-white bg-blue-600' : ''}
+                              ${tab === 'register' ? 'hover:text-blue-600' : ''}`}
                            href="#"
-                           onClick={() => setLoginModal(true)}
+                           onClick={() => setTab('login')}
                         >
                            Login
                         </a>
                      </li>
                      <li className="flex-auto text-center">
                         <a
-                           className="block rounded py-3 px-4 transition"
+                           className={`block rounded py-3 px-4 transition
+                              ${tab === 'register' ? 'hover:text-white text-white bg-blue-600' : ''}
+                              ${tab === 'login' ? 'hover:text-blue-600' : ''}`}
                            href="#"
-                           onClick={() => setLoginModal(false)}
+                           onClick={() => setTab('register')}
                         >
                            Register
                         </a>
                      </li>
                   </ul>
-                  {/* <!-- tabs --> */}
-                  {loginModal ? <Login /> : <Register />}
+
+                  {tab === 'login' && <Login />}
+                  {tab === 'register' && <Register />}
                </div>
             </div>
          </div>
