@@ -1,14 +1,19 @@
 import { Login } from './Login'
 import { Register } from './Register'
+import { closeModal} from '../../stores/modal'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react'
 
 export const AuthModal = () => {
+   const dispatch = useDispatch()
+   // True-- > Login / False-- > Register 
+   const [loginModal, setLoginModal] = useState(true); 
    return (
       <div className="fixed z-10 inset-0 overflow-y-auto" id="modal">
          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <div className="fixed inset-0 transition-opacity">
                <div className="absolute inset-0 bg-gray-800 opacity-75"></div>
             </div>
-
             {/*  this element is to trick the browser into centering the modal contents */}
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
 
@@ -21,7 +26,7 @@ export const AuthModal = () => {
                      {/* modal close button */}
                      <div
                         className="modal-close cursor-pointer z-50"
-                        onClick={() => console.log('TODO: close modal')}
+                        onClick={() => dispatch(closeModal())}
                      >
                         <i className="fas fa-times"></i>
                      </div>
@@ -33,7 +38,7 @@ export const AuthModal = () => {
                         <a
                            className="block rounded py-3 px-4 transition"
                            href="#"
-                           onClick={() => console.log('TODO: set state to login')}
+                           onClick={() => setLoginModal(true)}
                         >
                            Login
                         </a>
@@ -42,15 +47,14 @@ export const AuthModal = () => {
                         <a
                            className="block rounded py-3 px-4 transition"
                            href="#"
-                           onClick={() => console.log('TODO: set state to register')}
+                           onClick={() => setLoginModal(false)}
                         >
                            Register
                         </a>
                      </li>
                   </ul>
-
-                  <Login />
-                  <Register />
+                  {/* <!-- tabs --> */}
+                  {loginModal ? <Login /> : <Register />}
                </div>
             </div>
          </div>
