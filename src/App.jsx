@@ -4,7 +4,6 @@ import { Header } from './components/header'
 
 function App() {
    const showAuthModal = useSelector((state ) => state.modal.isOpen)
-   console.log(modalLayout)
    return (
       <>
          <Header />
