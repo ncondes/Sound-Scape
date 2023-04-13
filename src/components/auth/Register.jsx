@@ -1,8 +1,6 @@
-
 export const Register = () => {
-   const handleInputChange = ({ target }) => {
-      // TODO: Validate form per type
-      // console.log(target.value)
+   const handleInputChange = (event) => {
+      // TODO: validate form
    }
 
    const onFormSubmit = (event) => {
@@ -20,7 +18,7 @@ export const Register = () => {
             <div className="mb-3">
                <label className="inline-block mb-2">Name</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   type="text"
                   placeholder="Enter Name"
                   name="name"
@@ -31,7 +29,7 @@ export const Register = () => {
             <div className="mb-3">
                <label className="inline-block mb-2">Email</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   type="email"
                   placeholder="Enter Email"
                   name="email"
@@ -42,9 +40,9 @@ export const Register = () => {
             <div className="mb-3">
                <label className="inline-block mb-2">Age</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   type="number"
-                  placeholder=""
+                  placeholder="Age"
                   name="age"
                   onChange={handleInputChange}
                />
@@ -53,7 +51,7 @@ export const Register = () => {
             <div className="mb-3">
                <label className="inline-block mb-2">Password</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   type="password"
                   placeholder="Password"
                   name="password"
@@ -64,7 +62,7 @@ export const Register = () => {
             <div className="mb-3">
                <label className="inline-block mb-2">Confirm Password</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   type="password"
                   placeholder="Confirm Password"
                   name="confirm-password"
@@ -74,7 +72,7 @@ export const Register = () => {
             {/* country */}
             <div className="mb-3">
                <label className="inline-block mb-2">Country</label>
-               <select className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded">
+               <select className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded">
                   <option value="USA">USA</option>
                   <option value="Colombia">Colombia</option>
                   <option value="Russia">Russia</option>
@@ -83,7 +81,7 @@ export const Register = () => {
             {/* terms */}
             <div className="mb-3 flex items-center">
                <input
-                  className="rounded-sm border border-gray-500 transition duration-500 focus:ring-transparent"
+                  className="rounded border border-gray-500 focus:ring-transparent"
                   type="checkbox"
                   name="terms"
                   onChange={handleInputChange}
@@ -91,11 +89,12 @@ export const Register = () => {
                <label className="inline-block ml-2">I accept Music's Terms of Service</label>
             </div>
          </div>
-         <div className="mt-2 text-center">
-            <button className="mt-1 bg-purple-600 text-white p-2 rounded-md w-full" type="submit">
-               Submit
-            </button>
-         </div>
+         <button
+            className="block w-full bg-purple-600 text-white py-1.5 px-3 rounded rounded transition hover:bg-purple-700 cursor-pointer"
+            type="submit"
+         >
+            Submit
+         </button>
       </form>
    )
 }
