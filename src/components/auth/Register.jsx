@@ -90,7 +90,7 @@ export const Register = () => {
             </div>
          </div>
          <button
-            className="block w-full bg-purple-600 text-white py-1.5 px-3 rounded rounded transition hover:bg-purple-700 cursor-pointer"
+            className="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 cursor-pointer"
             type="submit"
          >
             Submit
