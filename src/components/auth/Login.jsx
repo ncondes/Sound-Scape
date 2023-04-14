@@ -17,7 +17,7 @@ export const Login = () => {
             <div className="mb-3">
                <label className="inline-block mb-2">Email</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   name="email"
                   placeholder="Enter Email"
                   type="email"
@@ -28,7 +28,7 @@ export const Login = () => {
             <div className="mb-3">
                <label className="inline-block  mb-2">Password</label>
                <input
-                  className="block w-full border border-gray-300 text-gray-800 border py-1.5 px-3 rounded-md transition duration-500 focus:outline-none focus:border-black rounded"
+                  className="block w-full border border-gray-300 text-gray-800 border py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
                   name="password"
                   placeholder="Password"
                   type="password"
@@ -37,7 +37,10 @@ export const Login = () => {
             </div>
          </div>
          <div className="mt-2 text-center">
-            <button className="mt-1 bg-purple-600 text-white p-2 rounded-md w-full" type="submit">
+            <button
+               className="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 cursor-pointer"
+               type="submit"
+            >
                Submit
             </button>
          </div>
