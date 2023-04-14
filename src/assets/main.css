@@ -1,0 +1,14 @@
+.introduction-bg {
+   animation: slide 50s linear infinite;
+   will-change: background-position;
+   z-index: -1;
+}
+
+@keyframes slide {
+   0% {
+      background-position: 0 0;
+   }
+   100% {
+      background-position: -4000px 0;
+   }
+}

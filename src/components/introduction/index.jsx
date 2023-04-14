@@ -1,27 +1,27 @@
-
 export const Introduction = () => {
-  return (
-     <section
-        className="relative"
-        style={{
-           backgroundImage: `url('public/assets/img/introduction-background.png')`,
-           width: '100vw',
-           height: '450px'
-        }}
-     >
-        <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 mx-auto text-center w-55% text-white">
-           <h1 className="text-5xl font-bold mb-2">Listen to Great Music!</h1>
-           <p className="max-w-none mt-4">
-              Sound Scape is a global music sharing platform that connects artists and music lovers,
-              offering an immersive and intuitive audio experience with a vast library of original
-              compositions across all genres connecting with like-minded individuals, and promoting
-              your own creative works.
-           </p>
-        </div>
-        <img
-           className="max-w-full absolute bottom-0 left-1/2 z-10 transform -translate-x-1/2"
-           src="public/assets/img/introduction-icons.png"
-        />
-     </section>
-  )
+   return (
+      <section className="mb-8 py-20 text-center relative">
+         <div
+            className="absolute inset-0 w-full h-full bg-contain introduction-bg"
+            style={{
+               backgroundImage: "url('assets/img/introduction-background.png')"
+            }}
+         ></div>
+         <div className="container mx-auto">
+            <div className="mx-auto text-white px-5">
+               <h1 className="text-5xl font-bold mb-5">Listen to Great Music!</h1>
+               <p className="w-full md:w-8/12 mx-auto">
+                  Sound Scape is a global music sharing platform that connects artists and music
+                  lovers, offering an immersive and intuitive audio experience with a vast library
+                  of original compositions across all genres connecting with like-minded
+                  individuals, and promoting your own creative works.
+               </p>
+            </div>
+         </div>
+         <img
+            className="relative block mx-auto mt-5 -mb-20 max-w-full"
+            src="assets/img/introduction-icons.png"
+         />
+      </section>
+   )
 }
