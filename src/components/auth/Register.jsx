@@ -4,9 +4,7 @@ import { useForm } from 'react-hook-form'
 export const Register = () => {
 
    const { register, handleSubmit, formState: { errors } } = useForm();
-   const handleInputChange = (event) => {
-      // TODO: validate form
-   }
+
      const validatePassword = (value) => {
         if (value === 'password') {
            return "Password cannot be 'password'"
@@ -23,10 +21,6 @@ export const Register = () => {
        }
     }
    const onSubmit = (data) => {
-   //    event.preventDefault()
-   //    const formData = new FormData(event.target)
-   //    const data = Object.fromEntries(formData.entries())
-   //    data.terms = event.target.terms.checked
       console.log(data)
    }
 
@@ -45,7 +39,6 @@ export const Register = () => {
                      maxLength: { value: 20, message: 'Name cannot exceed 20 characters' },
                      minLength: { value: 2, message: 'Name must be at least 2 characters' }
                   })}
-                  onChange={handleInputChange}
                />
                {errors.name && <p className="text-red-600">{errors.name.message}</p>}
             </div>
@@ -63,7 +56,6 @@ export const Register = () => {
                         message: 'Invalid email address'
                      }
                   })}
-                  onChange={handleInputChange}
                />
                {errors.email && <p className="text-red-600">{errors.email.message}</p>}
             </div>
@@ -79,7 +71,6 @@ export const Register = () => {
                      min: { value: 18, message: 'You must be at least 18 years old' },
                      max: { value: 85, message: 'You cannot be older than 85 years old' }
                   })}
-                  onChange={handleInputChange}
                />
                {errors.age && <p className="text-red-600">{errors.age.message}</p>}
             </div>
@@ -102,7 +93,6 @@ export const Register = () => {
                      },
                      validate: validatePassword
                   })}
-                  onChange={handleInputChange}
                />
                {errors.password && <p className="text-red-600">{errors.password.message}</p>}
             </div>
@@ -125,7 +115,6 @@ export const Register = () => {
                      },
                      validate: { value: validateConfirmPassword }
                   })}
-                  onChange={handleInputChange}
                />
                {errors.confirmPassword && (
                   <p className="text-red-600">{errors.confirmPassword.message}</p>
@@ -156,7 +145,6 @@ export const Register = () => {
                   {...register('termsOfService', {
                      required: 'You must accept the Terms of Service'
                   })}
-                  onChange={handleInputChange}
                />
                <label className="inline-block ml-2">I accept Music's Terms of Service</label>
             </div>
