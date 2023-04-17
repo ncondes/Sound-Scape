@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { InputField } from './InputField';
 
 
 export const Register = () => {
@@ -28,98 +29,91 @@ export const Register = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
          <div className="flex flex-col my-1">
             {/* name */}
-            <div className="mb-3">
-               <label className="inline-block mb-2">Name</label>
-               <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
-                  type="text"
-                  placeholder="Enter Name"
-                  {...register('name', {
-                     required: 'Name is required',
-                     maxLength: { value: 20, message: 'Name cannot exceed 20 characters' },
-                     minLength: { value: 2, message: 'Name must be at least 2 characters' }
-                  })}
-               />
-               {errors.name && <p className="text-red-600">{errors.name.message}</p>}
-            </div>
+            <InputField
+               label="Name"
+               name="name"
+               type="text"
+               placeholder="Enter Name"
+               rules={{
+                  required: 'Name is required',
+                  maxLength: { value: 20, message: 'Name cannot exceed 20 characters' },
+                  minLength: { value: 2, message: 'Name must be at least 2 characters' }
+               }}
+               register={register}
+               errors={errors}
+            />
             {/* email */}
-            <div className="mb-3">
-               <label className="inline-block mb-2">Email</label>
-               <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
-                  type="email"
-                  placeholder="Enter Email"
-                  {...register('email', {
-                     required: 'Email is required',
-                     pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: 'Invalid email address'
-                     }
-                  })}
-               />
-               {errors.email && <p className="text-red-600">{errors.email.message}</p>}
-            </div>
+            <InputField
+               label="Email"
+               name="email"
+               type="email"
+               placeholder="Enter Email"
+               rules={{
+                  required: 'Email is required',
+                  pattern: {
+                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                     message: 'Invalid email address'
+                  }
+               }}
+               register={register}
+               errors={errors}
+            />
             {/* age */}
-            <div className="mb-3">
-               <label className="inline-block mb-2">Age</label>
-               <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
-                  type="number"
-                  placeholder="Age"
-                  {...register('age', {
-                     required: 'Age is required',
-                     min: { value: 18, message: 'You must be at least 18 years old' },
-                     max: { value: 85, message: 'You cannot be older than 85 years old' }
-                  })}
-               />
-               {errors.age && <p className="text-red-600">{errors.age.message}</p>}
-            </div>
+            <InputField
+               label="Age"
+               name="age"
+               type="number"
+               placeholder="Age"
+               rules={{
+                  required: 'Age is required',
+                  min: { value: 18, message: 'You must be at least 18 years old' },
+                  max: { value: 85, message: 'You cannot be older than 85 years old' }
+               }}
+               register={register}
+               errors={errors}
+            />
             {/* password */}
-            <div className="mb-3">
-               <label className="inline-block mb-2">Password</label>
-               <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
-                  type="password"
-                  placeholder="Password"
-                  {...register('password', {
-                     required: 'Password is required',
-                     minLength: {
-                        value: 6,
-                        message: 'Password must be at least 6 characters'
-                     },
-                     maxLength: {
-                        value: 30,
-                        message: 'Password cannot be more than 30 characters'
-                     },
-                     validate: validatePassword
-                  })}
-               />
-               {errors.password && <p className="text-red-600">{errors.password.message}</p>}
-            </div>
+            <InputField
+               label="Password"
+               name="password"
+               type="password"
+               placeholder="Password"
+               rules={{
+                  required: 'Password is required',
+                  minLength: {
+                     value: 6,
+                     message: 'Password must be at least 6 characters'
+                  },
+                  maxLength: {
+                     value: 30,
+                     message: 'Password cannot be more than 30 characters'
+                  },
+                  validate: validatePassword
+               }}
+               register={register}
+               errors={errors}
+            />
             {/* confirm password */}
-            <div className="mb-3">
-               <label className="inline-block mb-2">Confirm Password</label>
-               <input
-                  className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
-                  type="password"
-                  placeholder="Confirm Password"
-                  {...register('confirmPassword', {
-                     required: 'Confirm Password is required',
-                     minLength: {
-                        value: 6,
-                        message: 'Confirm Password must be at least 6 characters'
-                     },
-                     maxLength: {
-                        value: 30,
-                        message: 'Confirm Password cannot be more than 30 characters'
-                     },
-                     validate: { value: validateConfirmPassword }
-                  })}
-               />
-               {errors.confirmPassword && (
-                  <p className="text-red-600">{errors.confirmPassword.message}</p>
-               )}
-            </div>
+            <InputField
+               label="Confirm Password"
+               name="confirm-password"
+               type="password"
+               placeholder="Confirm Password"
+               rules={{
+                  required: 'Confirm Password is required',
+                  minLength: {
+                     value: 6,
+                     message: 'Confirm Password must be at least 6 characters'
+                  },
+                  maxLength: {
+                     value: 30,
+                     message: 'Confirm Password cannot be more than 30 characters'
+                  },
+                  validate: { value: validateConfirmPassword }
+               }}
+               register={register}
+               errors={errors}
+            />
             {/* country */}
             <div className="mb-3">
                <label className="inline-block mb-2">Country</label>
