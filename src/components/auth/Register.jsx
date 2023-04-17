@@ -1,26 +1,25 @@
 import { useForm } from 'react-hook-form'
 import { InputField } from './InputField';
 
-
 export const Register = () => {
+   const {
+      register,
+      handleSubmit,
+      formState: { errors }
+   } = useForm()
 
-   const { register, handleSubmit, formState: { errors } } = useForm();
+   const validatePassword = (value) => {
+      if (value === 'password') return "Password cannot be 'password'"
+   }
 
-     const validatePassword = (value) => {
-        if (value === 'password') {
-           return "Password cannot be 'password'"
-        }
-     }
-    const validateConfirmPassword = (value, values) => {
-       if (value !== values.password) {
-          return 'Passwords do not match'
-       }
-    }
-    const validateCountry = (value) => {
-       if (value === 'Argentina') {
-          return 'We currently do not support Argentina'
-       }
-    }
+   const validateConfirmPassword = (value, values) => {
+      if (value !== values.password) return 'Passwords do not match'
+   }
+
+   const validateCountry = (value) => {
+      if (value === 'Argentina') return 'We currently do not support Argentina'
+   }
+
    const onSubmit = (data) => {
       console.log(data)
    }

@@ -2,8 +2,11 @@ import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
 
 export const Login = () => {
-
-   const { register, handleSubmit, formState: { errors }} = useForm()
+   const {
+      register,
+      handleSubmit,
+      formState: { errors }
+   } = useForm()
 
    const onSubmit = (data) => {
       console.log(data)
