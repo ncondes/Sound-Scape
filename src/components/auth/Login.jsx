@@ -1,11 +1,11 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { InputField } from './InputField'
+import { InputField2 } from './InputField2'
 
 export const Login = () => {
    const {
-      register,
+      control,
       handleSubmit,
-      formState: { errors }
    } = useForm()
 
    const onSubmit = (data) => {
@@ -28,9 +28,8 @@ export const Login = () => {
                      message: 'Invalid email address'
                   }
                }}
-               register={register}
-               errors={errors}
-               />
+               control={control}
+            />
             {/* password */}
             <InputField
                label="Password"
@@ -46,10 +45,9 @@ export const Login = () => {
                   maxLength: {
                      value: 30,
                      message: 'Password cannot be more than 30 characters'
-                  },
+                  }
                }}
-               register={register}
-               errors={errors}
+               control={control}
             />
          </div>
          <div className="mt-2 text-center">

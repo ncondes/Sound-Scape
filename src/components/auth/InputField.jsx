@@ -1,17 +1,26 @@
-import { forwardRef } from "react"
+import { Controller } from 'react-hook-form'
 
-export const InputField = forwardRef((props, ref) => {
-   const { label, name, type, placeholder, rules, errors, register} = props
+export const InputField = ({ label, name, type, placeholder, control, rules }) => {
    return (
       <div className="mb-3">
          <label className="inline-block mb-2">{label}</label>
-         <input
-            className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
-            type={type}
-            placeholder={placeholder}
-            {...register(name, rules)}
+         <Controller
+            name={name}
+            control={control}
+            defaultValue=""
+            rules={rules}
+            render={({ field, fieldState }) => (
+               <>
+                  <input
+                     className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
+                     type={type}
+                     placeholder={placeholder}
+                     {...field}
+                  />
+                  {fieldState.error && <p className="text-red-600">{fieldState.error.message}</p>}
+               </>
+            )}
          />
-         {errors[name] && <p className="text-red-600">{errors[name].message}</p>}
       </div>
    )
-})
+}

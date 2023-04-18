@@ -4,6 +4,7 @@ import { InputField } from './InputField';
 export const Register = () => {
    const {
       register,
+      control,
       handleSubmit,
       formState: { errors }
    } = useForm()
@@ -38,8 +39,7 @@ export const Register = () => {
                   maxLength: { value: 20, message: 'Name cannot exceed 20 characters' },
                   minLength: { value: 2, message: 'Name must be at least 2 characters' }
                }}
-               register={register}
-               errors={errors}
+               control={control}
             />
             {/* email */}
             <InputField
@@ -54,8 +54,7 @@ export const Register = () => {
                      message: 'Invalid email address'
                   }
                }}
-               register={register}
-               errors={errors}
+               control={control}
             />
             {/* age */}
             <InputField
@@ -68,8 +67,7 @@ export const Register = () => {
                   min: { value: 18, message: 'You must be at least 18 years old' },
                   max: { value: 85, message: 'You cannot be older than 85 years old' }
                }}
-               register={register}
-               errors={errors}
+               control={control}
             />
             {/* password */}
             <InputField
@@ -89,8 +87,7 @@ export const Register = () => {
                   },
                   validate: validatePassword
                }}
-               register={register}
-               errors={errors}
+               control={control}
             />
             {/* confirm password */}
             <InputField
@@ -110,8 +107,7 @@ export const Register = () => {
                   },
                   validate: { value: validateConfirmPassword }
                }}
-               register={register}
-               errors={errors}
+               control={control}
             />
             {/* country */}
             <div className="mb-3">
