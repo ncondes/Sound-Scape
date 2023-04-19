@@ -1,15 +1,32 @@
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
-import { InputField2 } from './InputField2'
 
 export const Login = () => {
-   const {
-      control,
-      handleSubmit,
-   } = useForm()
+   const { control, handleSubmit } = useForm()
 
    const onSubmit = (data) => {
       console.log(data)
+   }
+
+   const schema = {
+      email: {
+         required: 'Email is required',
+         pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'Invalid email address'
+         }
+      },
+      password: {
+         required: 'Password is required',
+         minLength: {
+            value: 6,
+            message: 'Password must be at least 6 characters'
+         },
+         maxLength: {
+            value: 30,
+            message: 'Password cannot be more than 30 characters'
+         }
+      }
    }
 
    return (
@@ -21,13 +38,7 @@ export const Login = () => {
                name="email"
                type="email"
                placeholder="Enter Email"
-               rules={{
-                  required: 'Email is required',
-                  pattern: {
-                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                     message: 'Invalid email address'
-                  }
-               }}
+               rules={schema.email}
                control={control}
             />
             {/* password */}
@@ -36,17 +47,7 @@ export const Login = () => {
                name="password"
                type="password"
                placeholder="Password"
-               rules={{
-                  required: 'Password is required',
-                  minLength: {
-                     value: 6,
-                     message: 'Password must be at least 6 characters'
-                  },
-                  maxLength: {
-                     value: 30,
-                     message: 'Password cannot be more than 30 characters'
-                  }
-               }}
+               rules={schema.password}
                control={control}
             />
          </div>

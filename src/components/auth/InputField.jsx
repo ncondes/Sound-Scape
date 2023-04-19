@@ -1,6 +1,6 @@
 import { Controller } from 'react-hook-form'
 
-export const InputField = ({ label, name, type, placeholder, control, rules }) => {
+export const InputField = ({ label, name, type, placeholder = label, control, rules }) => {
    return (
       <div className="mb-3">
          <label className="inline-block mb-2">{label}</label>
