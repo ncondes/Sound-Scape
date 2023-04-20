@@ -1,24 +1,28 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { SongItem } from "./SongItem"
-import { faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons"
+import { SongItem } from './SongItem'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeadphonesAlt } from '@fortawesome/free-solid-svg-icons'
 
 export const SongList = () => {
-  return (
-     <section className="container my-10 mx-auto w-full bg-white border-t-2 border-gray-100">
-        {/* table header */}
-        <div className="font-bold text-lg flex justify-between items-center p-6 border-b-2 border-gray-100">
-           <h1> Songs </h1>
-           <FontAwesomeIcon icon={faHeadphonesAlt} style={{ color: '#77db89' }} />
-        </div>
-        {/* song list */}
-        <ul>
-           <SongItem />
-           <SongItem />
-           <SongItem />
-           <SongItem />
-           <SongItem />
-           <SongItem />
-        </ul>
-     </section>
-  )
+   return (
+      <section className="container mx-auto">
+         <div className="bg-white rounded border border-gray-200 flex flex-col">
+            {/* header */}
+            <div className="font-bold text-xl flex justify-between items-center p-6 border-b border-gray-200">
+               <span>Songs</span>
+               <FontAwesomeIcon icon={faHeadphonesAlt} style={{ color: '#77db89' }} />
+            </div>
+            {/* list */}
+            <ul>
+               <SongItem />
+               <SongItem />
+               <SongItem />
+               <SongItem />
+               <SongItem />
+               <SongItem />
+               <SongItem />
+               <SongItem />
+            </ul>
+         </div>
+      </section>
+   )
 }
