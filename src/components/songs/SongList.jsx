@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { SongItem } from "./SongItem"
-import { faHeadphones } from "@fortawesome/free-solid-svg-icons"
+import { faHeadphonesAlt } from "@fortawesome/free-solid-svg-icons"
 
 export const SongList = () => {
   return (
@@ -8,19 +8,17 @@ export const SongList = () => {
         {/* table header */}
         <div className="font-bold text-lg flex justify-between items-center p-6 border-b-2 border-gray-100">
            <h1> Songs </h1>
-           <FontAwesomeIcon icon={faHeadphones} style={{ color: '#77db89' }} />
+           <FontAwesomeIcon icon={faHeadphonesAlt} style={{ color: '#77db89' }} />
         </div>
         {/* song list */}
-        {
-           <ul>
-              <li><SongItem /></li>
-              <li><SongItem /></li>
-              <li><SongItem /></li>
-              <li><SongItem /></li>
-              <li><SongItem /></li>
-              <li><SongItem /></li>
-           </ul>
-        }
+        <ul>
+           <SongItem />
+           <SongItem />
+           <SongItem />
+           <SongItem />
+           <SongItem />
+           <SongItem />
+        </ul>
      </section>
   )
 }
