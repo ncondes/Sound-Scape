@@ -1,6 +1,7 @@
 import { AuthModal } from './components/auth'
 import { Header } from './components/header'
 import { Introduction } from './components/introduction'
+import { SongList } from './components/songs'
 
 function App() {
    return (
@@ -8,6 +9,7 @@ function App() {
          <Header />
          <AuthModal />
          <Introduction />
+         <SongList />
       </>
    )
 }
