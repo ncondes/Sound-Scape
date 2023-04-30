@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
+import { useDispatch } from 'react-redux'
+import { startCreatingUser } from '../../stores/userThunks'
 
 export const Register = () => {
    const {
@@ -9,6 +11,7 @@ export const Register = () => {
       formState: { errors }
    } = useForm()
 
+   const dispatch = useDispatch()
    const validatePassword = (value) => {
       if (value === 'password') return "Password cannot be 'password'"
    }
@@ -22,7 +25,9 @@ export const Register = () => {
    }
 
    const onSubmit = (data) => {
+      
       console.log(data)
+      dispatch(startCreatingUser(data))
    }
 
    const schema = {

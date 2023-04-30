@@ -1,11 +1,15 @@
 import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
+import { useDispatch } from 'react-redux'
+import { startLogin } from '../../stores/userThunks'
 
 export const Login = () => {
    const { control, handleSubmit } = useForm()
+   const dispatch= useDispatch();
 
    const onSubmit = (data) => {
       console.log(data)
+      dispatch(startLogin(data))
    }
 
    const schema = {
