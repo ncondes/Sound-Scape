@@ -5,13 +5,16 @@ import { login, logout } from "./user"
 export const startLogin = ({ email, password }) => {
    return async (dispatch) => {
       const data = await loginUser({ email, password })
-      dispatch(login(data))
+      if( !data.ok ) return dispatch(logout( data));
+
+      dispatch(login())
    }
 }
 export const startCreatingUser = ({ email, password}) => {
    return async (dispatch) => {
-      const data = await registerUser({ email, password })
-      dispatch(login(data))
+      const data = await registerUser({ email, password }) 
+      if (!data.ok) return dispatch(logout(data))
+      dispatch(login())
    }
 }
 
