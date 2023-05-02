@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
-import { startLogin } from '../../stores/userThunks'
 import { Alert } from '../alert'
 import { useEffect, useMemo, useState } from 'react'
 import { startCreatingUser } from '../../stores/userThunks'
+import { useAlertMessage } from '../alert/useAlertMessage'
 
 export const Register = () => {
    const {
@@ -16,45 +16,12 @@ export const Register = () => {
 
    const dispatch = useDispatch()
    const { message, status } = useSelector((state) => state.user)
-   const [alertMessage, setAlertMessage] = useState({
-      message: '',
-      backgroundColor: ''
-   }) 
+   const { handleAlertMessage, alertMessage, backgroundColor } = useAlertMessage()
    const isAuthenticating = useMemo(() => status === 'checking', [status])
 
-
-   const handleAlertMessage = (alertMessage) => {
-      switch (alertMessage) {
-         case 'Firebase: Error (auth/email-already-in-use).': {
-            setAlertMessage({
-               message: 'Email already in use.',
-               backgroundColor: 'bg-red-500'
-            })
-            break
-         }
-         case 'Register successful': {
-            setAlertMessage({
-               message: 'Register successful!',
-               backgroundColor: 'bg-green-500'
-            })
-            break
-         }
-         case 'Checking...': {
-            setAlertMessage({
-               message: 'Checking...',
-               backgroundColor: 'bg-blue-500'
-            })
-            break
-         }
-
-         default:
-            break
-      }
-   }
-
-   useEffect(() => {
-      handleAlertMessage(message)
-   }, [message])
+      useEffect(() => {
+         handleAlertMessage(message, 'register')
+      }, [message])
 
    const validatePassword = (value) => {
       if (value === 'password') return "Password cannot be 'password'"
@@ -69,7 +36,6 @@ export const Register = () => {
    }
 
    const onSubmit = (data) => {
-      console.log(data)
       dispatch(startCreatingUser(data))
    }
 
@@ -127,7 +93,9 @@ export const Register = () => {
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
          <div className="flex flex-col my-1">
-            {alertMessage.message && <Alert alertMessage={alertMessage} />}
+            {alertMessage ? (
+               <Alert alertMessage={alertMessage} backgroundColor={backgroundColor} />
+            ) : null}
             {/* name */}
             <InputField
                label="Name"
