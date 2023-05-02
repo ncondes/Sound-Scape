@@ -28,21 +28,21 @@ export const Register = () => {
          case 'Firebase: Error (auth/email-already-in-use).': {
             setAlertMessage({
                message: 'Email already in use.',
-               backgroundColor: 'red-500'
+               backgroundColor: 'bg-red-500'
             })
             break
          }
          case 'Register successful': {
             setAlertMessage({
                message: 'Register successful!',
-               backgroundColor: 'green-500'
+               backgroundColor: 'bg-green-500'
             })
             break
          }
          case 'Checking...': {
             setAlertMessage({
                message: 'Checking...',
-               backgroundColor: 'blue-500'
+               backgroundColor: 'bg-blue-500'
             })
             break
          }

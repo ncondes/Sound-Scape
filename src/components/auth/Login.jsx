@@ -25,28 +25,28 @@ export const Login = () => {
          case 'Firebase: Error (auth/user-not-found).': {
             setAlertMessage({
                message: 'Email not found.',
-               backgroundColor: 'red-500'
+               backgroundColor: 'bg-red-500'
             })
             break
          }
          case 'Firebase: Error (auth/wrong-password).': {
             setAlertMessage({
                message: 'Invalid login credentials.',
-               backgroundColor: 'red-500'
+               backgroundColor: 'bg-red-500'
             })
             break
          }
          case 'Login successful': {
             setAlertMessage({
                message: 'Login successful!',
-               backgroundColor: 'green-500'
+               backgroundColor: 'bg-green-500'
             })
             break
          }
          case 'Checking...': {
             setAlertMessage({
                message: 'Checking...',
-               backgroundColor: 'blue-500'
+               backgroundColor: 'bg-blue-500'
             })
             break
          }
