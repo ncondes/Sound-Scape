@@ -8,7 +8,7 @@ export const registerUser = async ({ email, password}) => {
       try {
          const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password)
          const user = resp.user
-         console.log('Se ha iniciado sesión', user)
+         console.log('Registered //// ', user)
          return {
             user,
             ok: true
@@ -16,7 +16,7 @@ export const registerUser = async ({ email, password}) => {
       } catch (error) {
          const errorCode = error.code
          const errorMessage = error.message
-         console.log('No se ha podido iniciar sesión', errorCode, errorMessage)
+         console.log('Cant register //// ', errorCode, errorMessage)
          return {
             ok: false,
             errorMessage
@@ -28,7 +28,7 @@ export const loginUser = async ({ email, password }) => {
    try{
       const resp = await  signInWithEmailAndPassword(FirebaseAuth, email, password)
       const user = resp.user; 
-       console.log('Se ha iniciado sesión', user)
+       console.log('Logged In //// ', user)
          return {
             user,
             ok: true
@@ -36,7 +36,7 @@ export const loginUser = async ({ email, password }) => {
    }catch(error) {
          const errorCode = error.code
          const errorMessage = error.message
-         console.log('No se ha podido iniciar sesión', errorCode, errorMessage)
+         console.log('Cant Log In //// ', errorCode, errorMessage)
          return {
             ok: false,
             errorMessage

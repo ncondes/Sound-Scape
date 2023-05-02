@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogin } from '../../stores/userThunks'
+import { Alert } from '../alert'
+import { useEffect, useMemo, useState } from 'react'
 import { startCreatingUser } from '../../stores/userThunks'
 
 export const Register = () => {
@@ -12,6 +15,47 @@ export const Register = () => {
    } = useForm()
 
    const dispatch = useDispatch()
+   const { message, status } = useSelector((state) => state.user)
+   const [alertMessage, setAlertMessage] = useState({
+      message: '',
+      backgroundColor: ''
+   }) 
+   const isAuthenticating = useMemo(() => status === 'checking', [status])
+
+
+   const handleAlertMessage = (alertMessage) => {
+      switch (alertMessage) {
+         case 'Firebase: Error (auth/email-already-in-use).': {
+            setAlertMessage({
+               message: 'Email already in use.',
+               backgroundColor: 'red-500'
+            })
+            break
+         }
+         case 'Register successful': {
+            setAlertMessage({
+               message: 'Register successful!',
+               backgroundColor: 'green-500'
+            })
+            break
+         }
+         case 'Checking...': {
+            setAlertMessage({
+               message: 'Checking...',
+               backgroundColor: 'blue-500'
+            })
+            break
+         }
+
+         default:
+            break
+      }
+   }
+
+   useEffect(() => {
+      handleAlertMessage(message)
+   }, [message])
+
    const validatePassword = (value) => {
       if (value === 'password') return "Password cannot be 'password'"
    }
@@ -25,7 +69,6 @@ export const Register = () => {
    }
 
    const onSubmit = (data) => {
-      
       console.log(data)
       dispatch(startCreatingUser(data))
    }
@@ -84,6 +127,7 @@ export const Register = () => {
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
          <div className="flex flex-col my-1">
+            {alertMessage.message && <Alert alertMessage={alertMessage} />}
             {/* name */}
             <InputField
                label="Name"
@@ -145,12 +189,17 @@ export const Register = () => {
             </div>
             {errors.tos && <p className="text-red-600">{errors.tos.message}</p>}
          </div>
-         <button
-            className="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 cursor-pointer"
-            type="submit"
-         >
-            Submit
-         </button>
+         <div className="mt-2 text-center">
+            <button
+               className={`block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 cursor-pointer ${
+                  isAuthenticating ? 'opacity-50 cursor-not-allowed' : ''
+               }`}
+               type="submit"
+               disabled={isAuthenticating}
+            >
+               Submit
+            </button>
+         </div>
       </form>
    )
 }

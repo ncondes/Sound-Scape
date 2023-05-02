@@ -4,21 +4,30 @@ export const userSlice = createSlice({
    name: 'user',
    initialState: {
       isUserLoggedIn: false,
-      errorMessage: null,
+      message: null,
+      status: 'not-authenticated'  //cheking, not authenticated, authenticated
    },
    reducers: {
       register: (state) => {
-         state.isUserLoggedIn = true;
+         state.isUserLoggedIn = true
+         state.message = 'Register successful'
+         state.status = 'authenticated'
       },
       login: (state) => {
-         state.isUserLoggedIn = true;
-         state.errorMessage = null;
+         state.isUserLoggedIn = true
+         state.message = 'Login successful'
+         state.status = 'authenticated'
       },
-      logout: (state, {payload}) => {
-         state.isUserLoggedIn = false;
-         state.errorMessage = payload?.errorMessage; 
+      logout: (state, { payload }) => {
+         state.message = payload?.errorMessage
+         state.isUserLoggedIn = false
+         state.status = 'not-authenticated'
+      },
+      checkingCredentials: (state) =>{
+         state.message = 'Checking...'
+         state.status= 'checking'; 
       }
    }
 })
 
-export const { register, login, logout} = userSlice.actions
+export const { register, login, logout, checkingCredentials} = userSlice.actions
