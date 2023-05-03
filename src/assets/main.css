@@ -1,8 +1,29 @@
+a {
+   transition: all 0.15s ease;
+}
+
+a:hover {
+   /* text-amber-500 */
+   color: #f59e0b;
+   text-decoration: none;
+}
+
+.card-header .fa.text-orange,
+.card .card-header .fas.text-orange {
+   color: #ff5e3a;
+   fill: #ff5e3a;
+}
+
 .introduction-bg {
    animation: slide 50s linear infinite;
    will-change: background-position;
    z-index: -1;
 }
+
+/* Todo: playlist first child */
+/* Todo: upload dropbox */
+/* Todo: music background */
+/* Todo: progress bar */
 
 @keyframes slide {
    0% {
@@ -13,6 +34,6 @@
    }
 }
 
-:root{
-   background-color: #F3F4F6;
+:root {
+   background-color: #f3f4f6;
 }
