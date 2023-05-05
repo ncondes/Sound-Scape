@@ -3,7 +3,7 @@ import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogin } from '../../stores/userThunks'
 import { Alert } from '../alert'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useAlertMessage } from '../../hooks'
 
 const schema = {
@@ -31,7 +31,8 @@ export const Login = () => {
    const { control, handleSubmit } = useForm()
    const dispatch = useDispatch()
    const { message, status } = useSelector((state) => state.user)
-   const { handleAlertMessage, alertMessage, backgroundColor, showAlert } = useAlertMessage('login')
+   const { handleAlertMessage, alertMessage, backgroundColor, showAlert, clearAlertMessage } =
+      useAlertMessage('login')
 
    const isAuthenticating = useMemo(() => status === 'checking', [status])
 
@@ -39,6 +40,10 @@ export const Login = () => {
       dispatch(startLogin(data))
       handleAlertMessage(message, 'login')
    }
+
+   useEffect(() => {
+      clearAlertMessage()
+   }, [])
 
    return (
       <form onSubmit={handleSubmit(onSubmit)}>

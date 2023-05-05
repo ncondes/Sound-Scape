@@ -37,18 +37,19 @@ const dictionary = {
    }
 }
 
-export const useAlertMessage = (formType) => {
+export const useAlertMessage = (type) => {
    const [message, setMessage] = useState('')
    const [backgroundColor, setBackgroundColor] = useState('')
    const [showAlert, setShowAlert] = useState(false)
+
    const { message: messageFromFirebase } = useSelector((state) => state.user)
 
-   const handleAlertMessage = (alertMessage, type) => {
+   const handleAlertMessage = (alertMessage, formType) => {
       if (!alertMessage) return
 
       setShowAlert(true)
 
-      const selectedDictionary = dictionary[type]
+      const selectedDictionary = dictionary[formType]
 
       if (!selectedDictionary) return
 
@@ -59,14 +60,22 @@ export const useAlertMessage = (formType) => {
       }
    }
 
+   const clearAlertMessage = () => {
+      setMessage('')
+      setBackgroundColor('')
+      setShowAlert(false)
+   }
+
    useEffect(() => {
-      handleAlertMessage(messageFromFirebase, formType)
+      handleAlertMessage(messageFromFirebase, type)
+      return clearAlertMessage
    }, [messageFromFirebase])
 
    return {
       showAlert,
       alertMessage: message,
       handleAlertMessage,
+      clearAlertMessage,
       backgroundColor
    }
 }

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert } from '../alert'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { startCreatingUser } from '../../stores/userThunks'
 import { useAlertMessage } from '../../hooks'
 
@@ -67,7 +67,7 @@ export const Register = () => {
 
    const dispatch = useDispatch()
    const { message, status } = useSelector((state) => state.user)
-   const { handleAlertMessage, alertMessage, backgroundColor, showAlert } =
+   const { handleAlertMessage, alertMessage, backgroundColor, showAlert, clearAlertMessage } =
       useAlertMessage('register')
 
    const isAuthenticating = useMemo(() => status === 'checking', [status])
@@ -76,6 +76,10 @@ export const Register = () => {
       dispatch(startCreatingUser(data))
       handleAlertMessage(message, 'register')
    }
+
+   useEffect(() => {
+      clearAlertMessage()
+   }, [])
 
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
