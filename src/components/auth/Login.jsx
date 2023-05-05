@@ -3,49 +3,47 @@ import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogin } from '../../stores/userThunks'
 import { Alert } from '../alert'
-import { useEffect, useMemo, useState } from 'react'
-import { useAlertMessage } from '../alert/useAlertMessage'
+import { useMemo } from 'react'
+import { useAlertMessage } from '../../hooks'
+
+const schema = {
+   email: {
+      required: 'Email is required',
+      pattern: {
+         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+         message: 'Invalid email address'
+      }
+   },
+   password: {
+      required: 'Password is required',
+      minLength: {
+         value: 6,
+         message: 'Password must be at least 6 characters'
+      },
+      maxLength: {
+         value: 30,
+         message: 'Password cannot be more than 30 characters'
+      }
+   }
+}
 
 export const Login = () => {
    const { control, handleSubmit } = useForm()
-   const dispatch= useDispatch();
-   const {message, status} = useSelector(state => state.user)
+   const dispatch = useDispatch()
+   const { message, status } = useSelector((state) => state.user)
+   const { handleAlertMessage, alertMessage, backgroundColor, showAlert } = useAlertMessage('login')
+
    const isAuthenticating = useMemo(() => status === 'checking', [status])
 
-   const { handleAlertMessage, alertMessage, backgroundColor } = useAlertMessage()
-   
    const onSubmit = (data) => {
       dispatch(startLogin(data))
+      handleAlertMessage(message, 'login')
    }
 
-   const schema = {
-      email: {
-         required: 'Email is required',
-         pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address'
-         }
-      },
-      password: {
-         required: 'Password is required',
-         minLength: {
-            value: 6,
-            message: 'Password must be at least 6 characters'
-         },
-         maxLength: {
-            value: 30,
-            message: 'Password cannot be more than 30 characters'
-         }
-      }
-   }
-
-   useEffect(() => {
-         handleAlertMessage(message, 'login')
-   }, [message])
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
          <div className="flex flex-col my-1">
-            {alertMessage ? (
+            {showAlert ? (
                <Alert alertMessage={alertMessage} backgroundColor={backgroundColor} />
             ) : null}
             <InputField

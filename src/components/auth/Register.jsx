@@ -2,9 +2,60 @@ import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert } from '../alert'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { startCreatingUser } from '../../stores/userThunks'
-import { useAlertMessage } from '../alert/useAlertMessage'
+import { useAlertMessage } from '../../hooks'
+
+const schema = {
+   name: {
+      required: 'Name is required',
+      maxLength: { value: 20, message: 'Name cannot exceed 20 characters' },
+      minLength: { value: 2, message: 'Name must be at least 2 characters' }
+   },
+   email: {
+      required: 'Email is required',
+      pattern: {
+         value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+         message: 'Invalid email address'
+      }
+   },
+   age: {
+      required: 'Age is required',
+      min: { value: 18, message: 'You must be at least 18 years old' },
+      max: { value: 85, message: 'You cannot be older than 85 years old' }
+   },
+   password: {
+      required: 'Password is required',
+      minLength: {
+         value: 6,
+         message: 'Password must be at least 6 characters'
+      },
+      maxLength: {
+         value: 30,
+         message: 'Password cannot be more than 30 characters'
+      },
+      validate: validatePassword
+   },
+   confirm_password: {
+      required: 'Confirm Password is required',
+      minLength: {
+         value: 6,
+         message: 'Confirm Password must be at least 6 characters'
+      },
+      maxLength: {
+         value: 30,
+         message: 'Confirm Password cannot be more than 30 characters'
+      },
+      validate: { value: validateConfirmPassword }
+   },
+   country: {
+      required: 'Country is required',
+      validate: validateCountry
+   },
+   tos: {
+      required: 'You must accept the Terms of Service'
+   }
+}
 
 export const Register = () => {
    const {
@@ -16,84 +67,20 @@ export const Register = () => {
 
    const dispatch = useDispatch()
    const { message, status } = useSelector((state) => state.user)
-   const { handleAlertMessage, alertMessage, backgroundColor } = useAlertMessage()
+   const { handleAlertMessage, alertMessage, backgroundColor, showAlert } =
+      useAlertMessage('register')
+
    const isAuthenticating = useMemo(() => status === 'checking', [status])
-
-      useEffect(() => {
-         handleAlertMessage(message, 'register')
-      }, [message])
-
-   const validatePassword = (value) => {
-      if (value === 'password') return "Password cannot be 'password'"
-   }
-
-   const validateConfirmPassword = (value, values) => {
-      if (value !== values.password) return 'Passwords do not match'
-   }
-
-   const validateCountry = (value) => {
-      if (value === 'Argentina') return 'We currently do not support Argentina'
-   }
 
    const onSubmit = (data) => {
       dispatch(startCreatingUser(data))
-   }
-
-   const schema = {
-      name: {
-         required: 'Name is required',
-         maxLength: { value: 20, message: 'Name cannot exceed 20 characters' },
-         minLength: { value: 2, message: 'Name must be at least 2 characters' }
-      },
-      email: {
-         required: 'Email is required',
-         pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address'
-         }
-      },
-      age: {
-         required: 'Age is required',
-         min: { value: 18, message: 'You must be at least 18 years old' },
-         max: { value: 85, message: 'You cannot be older than 85 years old' }
-      },
-      password: {
-         required: 'Password is required',
-         minLength: {
-            value: 6,
-            message: 'Password must be at least 6 characters'
-         },
-         maxLength: {
-            value: 30,
-            message: 'Password cannot be more than 30 characters'
-         },
-         validate: validatePassword
-      },
-      confirm_password: {
-         required: 'Confirm Password is required',
-         minLength: {
-            value: 6,
-            message: 'Confirm Password must be at least 6 characters'
-         },
-         maxLength: {
-            value: 30,
-            message: 'Confirm Password cannot be more than 30 characters'
-         },
-         validate: { value: validateConfirmPassword }
-      },
-      country: {
-         required: 'Country is required',
-         validate: validateCountry
-      },
-      tos: {
-         required: 'You must accept the Terms of Service'
-      }
+      handleAlertMessage(message, 'register')
    }
 
    return (
       <form onSubmit={handleSubmit(onSubmit)}>
          <div className="flex flex-col my-1">
-            {alertMessage ? (
+            {showAlert ? (
                <Alert alertMessage={alertMessage} backgroundColor={backgroundColor} />
             ) : null}
             {/* name */}
@@ -170,4 +157,16 @@ export const Register = () => {
          </div>
       </form>
    )
+}
+
+function validatePassword(value) {
+   if (value === 'password') return "Password cannot be 'password'"
+}
+
+function validateConfirmPassword(value, values) {
+   if (value !== values.password) return 'Passwords do not match'
+}
+
+function validateCountry(value) {
+   if (value === 'Argentina') return 'We currently do not support Argentina'
 }
