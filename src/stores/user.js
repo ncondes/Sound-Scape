@@ -5,7 +5,7 @@ export const userSlice = createSlice({
    initialState: {
       isUserLoggedIn: false,
       message: null,
-      status: 'not-authenticated'  //cheking, not authenticated, authenticated
+      status: 'not-authenticated' //cheking, not authenticated, authenticated
    },
    reducers: {
       register: (state) => {
@@ -23,11 +23,11 @@ export const userSlice = createSlice({
          state.isUserLoggedIn = false
          state.status = 'not-authenticated'
       },
-      checkingCredentials: (state) =>{
+      checkingCredentials: (state) => {
          state.message = 'Checking...'
-         state.status= 'checking'; 
+         state.status = 'checking'
       }
    }
 })
 
-export const { register, login, logout, checkingCredentials} = userSlice.actions
+export const { register, login, logout, checkingCredentials } = userSlice.actions

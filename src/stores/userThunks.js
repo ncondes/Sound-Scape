@@ -1,6 +1,5 @@
-import { loginUser, logoutFirebase, registerUser } from "../firebase/providers"
-import { checkingCredentials, login, logout, register } from "./user"
-
+import { loginUser, logoutFirebase, registerUser } from '../firebase/providers'
+import { checkingCredentials, login, logout, register } from './user'
 
 export const chekingAuthentication = () => {
    return async (dispatch) => {
@@ -13,19 +12,18 @@ export const startLogin = ({ email, password }) => {
       dispatch(checkingCredentials())
 
       const data = await loginUser({ email, password })
-      if(!data.ok) return dispatch(logout(data));
+      if (!data.ok) return dispatch(logout(data))
 
       dispatch(login())
    }
 }
 
-
-export const startCreatingUser = ({ email, password}) => {
+export const startCreatingUser = ({ email, password }) => {
    return async (dispatch) => {
       dispatch(checkingCredentials())
 
-      const data = await registerUser({ email, password }) 
-      if(!data.ok) return dispatch(logout(data))
+      const data = await registerUser({ email, password })
+      if (!data.ok) return dispatch(logout(data))
 
       dispatch(register())
    }
@@ -37,4 +35,3 @@ export const startLogout = () => {
       dispatch(logout({}))
    }
 }
-

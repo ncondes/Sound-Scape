@@ -44,16 +44,13 @@ export const useAlertMessage = (formType) => {
    const { message: messageFromFirebase } = useSelector((state) => state.user)
 
    const handleAlertMessage = (alertMessage, type) => {
-      if (!alertMessage) {
-         return
-      } else {
-         setShowAlert(true)
-      }
+      if (!alertMessage) return
+
+      setShowAlert(true)
 
       const selectedDictionary = dictionary[type]
-      if (!selectedDictionary) {
-         return
-      }
+
+      if (!selectedDictionary) return
 
       const selectedAlert = selectedDictionary[alertMessage]
       if (selectedAlert) {
