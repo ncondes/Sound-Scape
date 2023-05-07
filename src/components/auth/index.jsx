@@ -2,13 +2,11 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Login } from './Login'
 import { Register } from './Register'
-import { closeModal } from '../../stores/modal'
+import { closeModal } from '../../store/slices/modal'
 
 export const AuthModal = () => {
    const dispatch = useDispatch()
-
    const { isOpen } = useSelector((state) => state.modal)
-
    const [tab, setTab] = useState('login')
 
    const handleClose = () => {
