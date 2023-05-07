@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
-import { startLogin } from '../../stores/thunks/auth'
+import { startLogin } from '../../store/thunks/auth'
 import { Alert } from '../alert'
 import { useMemo } from 'react'
 import { useAlertMessage } from '../../hooks'

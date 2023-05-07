@@ -3,7 +3,7 @@ import { InputField } from './InputField'
 import { useDispatch, useSelector } from 'react-redux'
 import { Alert } from '../alert'
 import { useMemo } from 'react'
-import { startCreatingUser } from '../../stores/thunks/auth'
+import { startCreatingUser } from '../../store/thunks/auth'
 import { useAlertMessage } from '../../hooks'
 
 const schema = {

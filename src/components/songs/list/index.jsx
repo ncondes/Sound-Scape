@@ -1,4 +1,4 @@
-import { SongItem } from './SongItem'
+import { SongItem } from '../song'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeadphonesAlt } from '@fortawesome/free-solid-svg-icons'
 
