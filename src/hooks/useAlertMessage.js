@@ -68,6 +68,7 @@ export const useAlertMessage = () => {
    }, [])
 
    return {
+      setShowAlert,
       showAlert,
       message,
       variant,
