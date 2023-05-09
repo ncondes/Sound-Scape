@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightFromBracket, faRightToBracket, faSliders } from '@fortawesome/free-solid-svg-icons'
 import { openModal } from '../../store/slices/modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { logout } from '../../store/slices/auth'
+import { startLogout } from '../../store/thunks/auth'
 
 export const Header = () => {
    const dispatch = useDispatch()
@@ -13,7 +13,7 @@ export const Header = () => {
    }
 
    const handleLogOut = () => {
-      dispatch(logout())
+      dispatch(startLogout())
    }
 
    return (
