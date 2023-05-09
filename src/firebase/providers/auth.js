@@ -1,8 +1,15 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {
+   browserLocalPersistence,
+   createUserWithEmailAndPassword,
+   setPersistence,
+   signInWithEmailAndPassword,
+   signOut
+} from 'firebase/auth'
 import { auth } from '../'
 
 export const registerUser = async ({ email, password }) => {
    try {
+      await setPersistence(auth, browserLocalPersistence)
       const credentials = await createUserWithEmailAndPassword(auth, email, password)
       return { ok: true }
    } catch (error) {
@@ -13,6 +20,7 @@ export const registerUser = async ({ email, password }) => {
 
 export const loginUser = async ({ email, password }) => {
    try {
+      await setPersistence(auth, browserLocalPersistence)
       const credentials = await signInWithEmailAndPassword(auth, email, password)
       return { ok: true }
    } catch (error) {
