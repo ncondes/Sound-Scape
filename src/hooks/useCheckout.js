@@ -11,12 +11,11 @@ export const useCheckout = () => {
 
    useEffect(() => {
       onAuthStateChanged(auth, (user) => {
+         setIsLoading(false)
          if (!user) {
-            setIsLoading(false)
             return dispatch(logout())
          }
          dispatch(login())
-         setIsLoading(false)
       })
    }, [])
 
