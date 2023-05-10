@@ -1,5 +1,4 @@
-import { useEffect } from 'react'
-import { useAlertMessage } from '../../hooks'
+import { useState } from 'react'
 
 const variants = {
    success: 'bg-green-500',
@@ -8,15 +7,11 @@ const variants = {
 }
 
 export const Alert = ({ message, variant }) => {
-   const { setShowAlert, showAlert, displayAlert } = useAlertMessage()
+   const [showAlert, setShowAlert] = useState(true)
 
    const handleClose = () => {
       setShowAlert(false)
    }
-
-   useEffect(() => {
-      displayAlert()
-   }, [])
 
    return (
       <>
