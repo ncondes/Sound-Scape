@@ -21,7 +21,7 @@ export const Alert = ({ message, variant }) => {
                   variants[variant] ?? ''
                }  font-semibold mb-3`}
             >
-               <div className="modal-close cursor-pointer absolute right-0 px-1">
+               <div className="cursor-pointer absolute right-0 px-1">
                   <i className="fas fa-times green" onClick={handleClose}></i>
                </div>
                <p className="text-center p-4">{message}</p>

@@ -12,10 +12,8 @@ export const useCheckout = () => {
    useEffect(() => {
       onAuthStateChanged(auth, (user) => {
          setIsLoading(false)
-         if (!user) {
-            return dispatch(logout())
-         }
-         dispatch(login())
+
+         dispatch(!user ? logout() : login())
       })
    }, [])
 

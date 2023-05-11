@@ -31,7 +31,7 @@ export const AuthModal = () => {
                   <div className="flex justify-between items-center pb-4">
                      <p className="text-2xl font-bold">Your Account</p>
                      {/* modal close button */}
-                     <div className="modal-close cursor-pointer z-50" onClick={handleClose}>
+                     <div className="cursor-pointer z-50" onClick={handleClose}>
                         <i className="fas fa-times"></i>
                      </div>
                   </div>
@@ -62,8 +62,8 @@ export const AuthModal = () => {
                      </li>
                   </ul>
 
-                  {tab === 'login' && <Login />}
-                  {tab === 'register' && <Register />}
+                  {tab === 'login' ? <Login /> : null}
+                  {tab === 'register' ? <Register /> : null}
                </div>
             </div>
          </div>

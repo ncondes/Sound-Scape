@@ -6,6 +6,7 @@ import { useCheckout } from './hooks'
 
 function App() {
    const { status, isLoading } = useCheckout()
+
    return (
       <>
          {!isLoading ? (
