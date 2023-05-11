@@ -45,10 +45,6 @@ export const useAlertMessage = () => {
 
    const displayAlert = () => {
       setShowAlert(true)
-      // add a delay of 3 seconds
-      setTimeout(() => {
-         setShowAlert(false)
-      }, 3000)
    }
 
    const clearAlertMessage = () => {

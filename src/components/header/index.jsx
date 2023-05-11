@@ -1,13 +1,19 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightToBracket, faSliders } from '@fortawesome/free-solid-svg-icons'
+import { faRightFromBracket, faRightToBracket, faSliders } from '@fortawesome/free-solid-svg-icons'
 import { openModal } from '../../store/slices/modal'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { startLogout } from '../../store/thunks/auth'
 
 export const Header = () => {
    const dispatch = useDispatch()
+   const { isUserLoggedIn } = useSelector((state) => state.auth)
 
    const handleOpen = () => {
       dispatch(openModal())
+   }
+
+   const handleLogOut = () => {
+      dispatch(startLogout())
    }
 
    return (
@@ -32,16 +38,33 @@ export const Header = () => {
                         Manage
                      </a>
                   </li>
-                  <li>
-                     <a href="#" className="px-3 text-white font-semibold" onClick={handleOpen}>
-                        <FontAwesomeIcon
-                           className="mx-1"
-                           icon={faRightToBracket}
-                           style={{ color: '#FFF' }}
-                        />
-                        Login / Register
-                     </a>
-                  </li>
+                  {isUserLoggedIn ? (
+                     <li>
+                        <a
+                           href="#"
+                           className="px-3 text-white font-semibold"
+                           onClick={handleLogOut}
+                        >
+                           <FontAwesomeIcon
+                              className="mx-1"
+                              icon={faRightFromBracket}
+                              style={{ color: '#FFF' }}
+                           />
+                           Logout
+                        </a>
+                     </li>
+                  ) : (
+                     <li>
+                        <a href="#" className="px-3 text-white font-semibold" onClick={handleOpen}>
+                           <FontAwesomeIcon
+                              className="mx-1"
+                              icon={faRightToBracket}
+                              style={{ color: '#FFF' }}
+                           />
+                           Login / Register
+                        </a>
+                     </li>
+                  )}
                </ul>
             </div>
          </nav>
