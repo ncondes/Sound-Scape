@@ -1,11 +1,10 @@
 import { AuthModal } from './components/auth'
 import { Header } from './components/header'
-import { Introduction } from './components/introduction'
-import { SongList } from './components/songs/list'
 import { useCheckout } from './hooks'
+import { AppRouter } from './router/AppRouter'
 
 function App() {
-   const { status, isLoading } = useCheckout()
+   const { isLoading } = useCheckout()
 
    return (
       <>
@@ -13,8 +12,7 @@ function App() {
             <>
                <Header />
                <AuthModal />
-               <Introduction />
-               {status === 'authenticated' ? <SongList /> : null}
+               <AppRouter />
             </>
          ) : null}
       </>
