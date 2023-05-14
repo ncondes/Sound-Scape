@@ -16,9 +16,6 @@ export const SongList = () => {
                <SongItem />
                <SongItem />
                <SongItem />
-               <SongItem />
-               <SongItem />
-               <SongItem />
             </ul>
          </div>
       </section>
