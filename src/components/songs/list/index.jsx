@@ -7,7 +7,7 @@ export const SongList = () => {
             {/* header */}
             <div className="font-bold text-xl flex justify-between items-center p-6 border-b border-gray-200">
                <span>Songs</span>
-               <i className="fa-solid fa-headphones-alt" style={{ color: '#77db89' }}></i>
+               <i className="fa-solid fa-headphones-alt text-lime"></i>
             </div>
             {/* list */}
             <ul>
