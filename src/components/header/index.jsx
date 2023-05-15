@@ -18,7 +18,7 @@ export const Header = () => {
       <header className="bg-gray-700">
          <nav className="container mx-auto flex justify-between items-center py-5 px-4">
             {/* app name */}
-            <a href="/home">
+            <a href="/">
                <p className="text-white font-bold text-2xl">
                   SOUND <span className="font-normal text-xl text-amber-500">Scape</span>
                </p>
