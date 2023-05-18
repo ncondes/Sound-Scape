@@ -12,7 +12,7 @@ export const InputField = ({ label, name, type, placeholder = label, control, ru
             render={({ field, fieldState }) => (
                <>
                   <input
-                     className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
+                     className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black focus:ring-0 rounded"
                      type={type}
                      placeholder={placeholder}
                      {...field}
