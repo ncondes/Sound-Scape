@@ -1,23 +1,23 @@
-import React from 'react'
-import { Song } from './Song'
+import { MySong } from './MySong'
 
 export const MySongs = () => {
    return (
-      <section
-         style={{ height: 'fit-content', minHeight: '64px' }}
-         className="w-[60%] mx-4 my-6 bg-white"
-      >
-         <div className="flex flex-row justify-between items-center p-6 border-b border-gray-200">
-            <span className="font-bold">My Songs</span>
-            <i className="fa-solid fa-compact-disc fa-xl text-lime"></i>
+      <section className="col-span-2">
+         <div className="bg-white rounded border border-gray-200 flex flex-col">
+            {/* header */}
+            <div className="flex justify-between items-center px-6 pt-6 pb-5 border-b border-gray-200">
+               <span className="font-bold">My Songs</span>
+               <i className="fa-solid fa-compact-disc fa-xl text-lime"></i>
+            </div>
+            {/* content */}
+            <ul className="p-6">
+               <MySong />
+               <MySong />
+               <MySong />
+               <MySong />
+               <MySong />
+            </ul>
          </div>
-         <ul>
-            <Song />
-            <Song />
-            <Song />
-            <Song />
-            <Song />
-         </ul>
       </section>
    )
 }

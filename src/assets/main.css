@@ -20,10 +20,29 @@ a:hover {
    z-index: -1;
 }
 
-/* Todo: playlist first child */
-/* Todo: upload dropbox */
-/* Todo: music background */
-/* Todo: progress bar */
+.progress-bar {
+   background-size: 1rem 1rem;
+   background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.15) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.15) 50%,
+      rgba(255, 255, 255, 0.15) 75%,
+      transparent 75%,
+      transparent
+   );
+   animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+   0% {
+      background-position: 1rem 0;
+   }
+   100% {
+      background-position: 0 0;
+   }
+}
 
 @keyframes slide {
    0% {
@@ -36,19 +55,4 @@ a:hover {
 
 :root {
    background-color: #f3f4f6;
-}
-
-progress[value]::-webkit-progress-value {
-   background-image: -webkit-linear-gradient(
-         -45deg,
-         transparent 33%,
-         rgba(0, 0, 0, 0.1) 33%,
-         rgba(0, 0, 0, 0.1) 66%,
-         transparent 66%
-      ),
-      -webkit-linear-gradient(top, rgba(255, 255, 255, 0.25), rgba(0, 0, 0, 0.25)),
-      -webkit-linear-gradient(left, rgb(255, 255, 255), rgb(71, 126, 148));
-
-   border-radius: 2px;
-   background-size: 35px 20px, 100% 100%, 100% 100%;
 }

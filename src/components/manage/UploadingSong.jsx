@@ -1,15 +1,13 @@
-import React from 'react'
-
-export const UploadingSong = () => {
+export const UploadingSong = ({ progress }) => {
    return (
-      //   <div className="mx-6 my-4">
-      //      <span className="font-bold">Just another song.mp3</span>
-      //      <div className="bg-gray-200 p-2 rounded-md "> </div>
-      //   </div>
-
-      <div className="flex flex-col mx-6 my-4">
-         <label className="font-bold">Just another song.mp3</label>
-         <progress className="rounded-full overflow-hidden w-full" value="60" max="100"></progress>
+      <div className="mb-4">
+         <label className="font-bold text-sm">Just another song.mp3</label>
+         <div className="flex rounded overflow-hidden bg-gray-200 h-4">
+            <div
+               className="transition-all progress-bar bg-blue-400"
+               style={{ width: `${progress}%` }}
+            ></div>
+         </div>
       </div>
    )
 }
