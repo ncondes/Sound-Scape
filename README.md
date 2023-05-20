@@ -14,7 +14,7 @@ This is an open source project with the objective of create a web application th
 1. Install Docker desktop on your machine
    [Get Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
-2. Run the following code snipet in the terminal:
+2. Run the following code snippet in the terminal:
 
 ```c
    docker compose up -d
