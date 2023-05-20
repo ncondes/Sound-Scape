@@ -2,19 +2,22 @@
 
 This is an open source project with the objective of create a web application that allows the users to upload their favorite songs, listen to the music uploaded by others and more!
 
+# Technologies
+
+-  React
+-  Tailwind CSS
+-  Firebase
+-  Docker
+
 ## Run the project
 
--  Install yarn in your machine:
-   [Yarn Docs](https://classic.yarnpkg.com/lang/en/docs/install).
+1. Install Docker desktop on your machine
+   [Get Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
--  Re-create the node modules:
-
-```c
-   yarn
-```
-
--  Run the project locally:
+2. Run the following code snipet in the terminal:
 
 ```c
-   yarn dev
+   docker compose up -d
 ```
+
+-  From here you will have a container running in your machine with the app
