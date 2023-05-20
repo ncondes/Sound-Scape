@@ -9,11 +9,11 @@ function App() {
    return (
       <>
          {!isLoading ? (
-            <>
+            <div className="flex flex-col h-screen">
                <Header />
                <AuthModal />
                <AppRouter />
-            </>
+            </div>
          ) : null}
       </>
    )
