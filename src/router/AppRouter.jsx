@@ -1,17 +1,18 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { HomePage, ManagePage } from '../pages'
-import { Error404 } from '../pages/Error404'
+import { HomePage, ManagePage, NotFoundPage } from '../pages'
 
 const router = createBrowserRouter([
    {
       path: '/',
-      element: <HomePage />,
-      errorElement: <Error404 />
+      element: <HomePage />
    },
    {
       path: '/manage',
-      element: <ManagePage />,
-      errorElement: <Error404 />
+      element: <ManagePage />
+   },
+   {
+      path: '*',
+      element: <NotFoundPage />
    }
 ])
 
