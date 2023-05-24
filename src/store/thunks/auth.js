@@ -11,9 +11,9 @@ export const startLogin = ({ email, password }) => {
    return async (dispatch) => {
       dispatch(checkingCredentials())
 
-      const data = await loginUser({ email, password })
-      if (!data.ok) {
-         dispatch(setMessage(data.errorMessage))
+      const resp = await loginUser({ email, password })
+      if (!resp.ok) {
+         dispatch(setMessage(resp.errorMessage))
          dispatch(logout())
          return
       }
@@ -22,13 +22,13 @@ export const startLogin = ({ email, password }) => {
    }
 }
 
-export const startCreatingUser = ({ email, password }) => {
+export const startCreatingUser = (userData) => {
    return async (dispatch) => {
       dispatch(checkingCredentials())
 
-      const data = await registerUser({ email, password })
-      if (!data.ok) {
-         dispatch(setMessage(data.errorMessage))
+      const resp = await registerUser(userData)
+      if (!resp.ok) {
+         dispatch(setMessage(resp.errorMessage))
          dispatch(logout())
          return
       }
