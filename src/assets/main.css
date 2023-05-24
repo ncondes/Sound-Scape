@@ -2,7 +2,7 @@ a {
    transition: all 0.15s ease;
 }
 
-a:hover {
+.navbar-link:hover {
    /* text-amber-500 */
    color: #f59e0b;
    text-decoration: none;

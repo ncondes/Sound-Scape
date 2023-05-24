@@ -1,5 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { HomePage, ManagePage } from '../pages'
+import { HomePage, ManagePage, NotFoundPage } from '../pages'
 
 const router = createBrowserRouter([
    {
@@ -9,6 +9,10 @@ const router = createBrowserRouter([
    {
       path: '/manage',
       element: <ManagePage />
+   },
+   {
+      path: '*',
+      element: <NotFoundPage />
    }
 ])
 

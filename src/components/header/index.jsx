@@ -27,7 +27,7 @@ export const Header = () => {
                <ul className="flex flex-row mt-1">
                   {/* navigation links */}
                   <li>
-                     <a href="/manage" className="px-3 text-white font-semibold">
+                     <a href="/manage" className="navbar-link px-3 text-white font-semibold">
                         <i className="fa-solid fa-sliders mx-1 "></i>
                         Manage
                      </a>
@@ -36,7 +36,7 @@ export const Header = () => {
                      <li>
                         <a
                            href="#"
-                           className="px-3 text-white font-semibold"
+                           className="navbar-link px-3 text-white font-semibold"
                            onClick={handleLogOut}
                         >
                            <i className="fa-solid fa-right-from-bracket mx-1 "></i>
@@ -45,7 +45,11 @@ export const Header = () => {
                      </li>
                   ) : (
                      <li>
-                        <a href="#" className="px-3 text-white font-semibold" onClick={handleOpen}>
+                        <a
+                           href="#"
+                           className="navbar-link px-3 text-white font-semibold"
+                           onClick={handleOpen}
+                        >
                            <i className="fa-solid fa-right-to-bracket mx-1 "></i>
                            Login / Register
                         </a>
