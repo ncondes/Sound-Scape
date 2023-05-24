@@ -36,8 +36,7 @@ export const Header = () => {
                         </li>
                         <li>
                            <a
-                              href="#"
-                              className="navbar-link px-3 text-white font-semibold"
+                              className="cursor-pointer navbar-link px-3 text-white font-semibold"
                               onClick={handleLogOut}
                            >
                               <i className="fa-solid fa-right-from-bracket mx-1 "></i>
@@ -48,8 +47,7 @@ export const Header = () => {
                   ) : (
                      <li>
                         <a
-                           href="#"
-                           className="navbar-link px-3 text-white font-semibold"
+                           className="cursor-pointer navbar-link px-3 text-white font-semibold"
                            onClick={handleOpen}
                         >
                            <i className="fa-solid fa-right-to-bracket mx-1 "></i>

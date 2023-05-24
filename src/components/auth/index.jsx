@@ -40,10 +40,9 @@ export const AuthModal = () => {
                   <ul className="flex flex-wrap mb-4">
                      <li className="flex-auto text-center">
                         <a
-                           className={`block rounded py-3 px-4 transition
+                           className={`cursor-pointer block rounded py-3 px-4 transition
                               ${tab === 'login' ? 'hover:text-white text-white bg-blue-600' : ''}
                               ${tab === 'register' ? 'hover:text-blue-600' : ''}`}
-                           href="#"
                            onClick={() => setTab('login')}
                         >
                            Login
@@ -51,10 +50,9 @@ export const AuthModal = () => {
                      </li>
                      <li className="flex-auto text-center">
                         <a
-                           className={`block rounded py-3 px-4 transition
+                           className={`cursor-pointer block rounded py-3 px-4 transition
                               ${tab === 'register' ? 'hover:text-white text-white bg-blue-600' : ''}
                               ${tab === 'login' ? 'hover:text-blue-600' : ''}`}
-                           href="#"
                            onClick={() => setTab('register')}
                         >
                            Register
