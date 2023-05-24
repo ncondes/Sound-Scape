@@ -1,6 +1,8 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { HomePage, ManagePage, NotFoundPage } from '../pages'
 
+import { PrivateRoute } from './PrivateRoute'
+
 const router = createBrowserRouter([
    {
       path: '/',
@@ -8,7 +10,11 @@ const router = createBrowserRouter([
    },
    {
       path: '/manage',
-      element: <ManagePage />
+      element: (
+         <PrivateRoute>
+            <ManagePage />
+         </PrivateRoute>
+      )
    },
    {
       path: '*',

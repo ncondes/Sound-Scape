@@ -25,24 +25,26 @@ export const Header = () => {
             </a>
             <div className="flex items-center">
                <ul className="flex flex-row mt-1">
-                  {/* navigation links */}
-                  <li>
-                     <a href="/manage" className="navbar-link px-3 text-white font-semibold">
-                        <i className="fa-solid fa-sliders mx-1 "></i>
-                        Manage
-                     </a>
-                  </li>
                   {isUserLoggedIn ? (
-                     <li>
-                        <a
-                           href="#"
-                           className="navbar-link px-3 text-white font-semibold"
-                           onClick={handleLogOut}
-                        >
-                           <i className="fa-solid fa-right-from-bracket mx-1 "></i>
-                           Logout
-                        </a>
-                     </li>
+                     <>
+                        {/* navigation links */}
+                        <li>
+                           <a href="/manage" className="navbar-link px-3 text-white font-semibold">
+                              <i className="fa-solid fa-sliders mx-1 "></i>
+                              Manage
+                           </a>
+                        </li>
+                        <li>
+                           <a
+                              href="#"
+                              className="navbar-link px-3 text-white font-semibold"
+                              onClick={handleLogOut}
+                           >
+                              <i className="fa-solid fa-right-from-bracket mx-1 "></i>
+                              Logout
+                           </a>
+                        </li>
+                     </>
                   ) : (
                      <li>
                         <a
