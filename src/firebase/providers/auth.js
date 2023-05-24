@@ -6,10 +6,10 @@ export const registerUser = async ({ email, password, name, age, country }) => {
    try {
       const credentials = await createUserWithEmailAndPassword(auth, email, password)
       await setDoc(doc(db, 'users', credentials.user.uid), {
-         name: name,
-         email: email,
-         age: age,
-         country: country
+         name,
+         email,
+         age,
+         country,
       })
 
       return { ok: true }
