@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '@/store/modal/modal.slice'
 import { startLogout } from '@/store/auth/auth.thunk'
+import { selectIsUserLoggedIn } from '@/store/auth/auth.selectors'
 
 export const Header = () => {
   const dispatch = useDispatch()
-  const { isUserLoggedIn } = useSelector((state) => state.auth)
+  const isUserLoggedIn = useSelector(selectIsUserLoggedIn)
 
   const handleOpen = () => {
     dispatch(openModal())

@@ -5,6 +5,7 @@ import { startLogin } from '@/store/auth/auth.thunk'
 import { Alert } from '../alert/Alert'
 import { useMemo } from 'react'
 import { useAlertMessage } from '@/hooks'
+import { selectAuthStatus } from '../../store/auth/auth.selectors'
 
 const schema = {
   email: {
@@ -30,7 +31,7 @@ const schema = {
 export const Login = () => {
   const { control, handleSubmit } = useForm()
   const dispatch = useDispatch()
-  const { status } = useSelector((state) => state.auth)
+  const status = useSelector(selectAuthStatus)
   const { message, variant, showAlert, displayAlert } = useAlertMessage()
   const isAuthenticating = useMemo(() => status === 'checking', [status])
 

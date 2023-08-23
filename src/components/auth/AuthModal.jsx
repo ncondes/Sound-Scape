@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Login } from './Login'
 import { Register } from './Register'
 import { closeModal } from '@/store/modal/modal.slice'
+import { selectIsAuthModalOpen } from '@/store/modal/modal.selectors'
 
 export const AuthModal = () => {
   const dispatch = useDispatch()
-  const { isOpen } = useSelector((state) => state.modal)
+  const isOpen = useSelector(selectIsAuthModalOpen)
   const [tab, setTab] = useState('login')
 
   const handleClose = () => {
@@ -31,9 +32,9 @@ export const AuthModal = () => {
             <div className="flex justify-between items-center pb-4">
               <p className="text-2xl font-bold">Your Account</p>
               {/* modal close button */}
-              <div className="cursor-pointer z-50" onClick={handleClose}>
+              <button className="cursor-pointer z-50" onClick={handleClose}>
                 <i className="fas fa-times" />
-              </div>
+              </button>
             </div>
 
             {/* <!-- tabs --> */}

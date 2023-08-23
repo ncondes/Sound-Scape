@@ -17,9 +17,9 @@ export const Alert = ({ message, variant }) => {
     <>
       {showAlert ? (
         <div className={`relative container block w-full text-white ${variants[variant] ?? ''}  font-semibold mb-3`}>
-          <div className="cursor-pointer absolute right-0 px-1">
-            <i className="fas fa-times green" onClick={handleClose} />
-          </div>
+          <button className="cursor-pointer absolute right-0 px-1" onClick={handleClose}>
+            <i className="fas fa-times green" />
+          </button>
           <p className="text-center p-4">{message}</p>
         </div>
       ) : null}

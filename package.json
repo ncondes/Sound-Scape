@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "npx prettier --write '**/*.js'"
+    "lint": "npx prettier --write '**/*.js'",
+    "test": "vitest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
@@ -23,6 +24,8 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
+    "@testing-library/jest-dom": "^6.0.1",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
@@ -32,9 +35,11 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^22.1.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.1",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "vitest": "^0.34.2"
   },
   "repository": "git@github.com:ncondes/sound-scape.git",
   "author": "nicolas conde <ncondes@unal.edu.co>",
