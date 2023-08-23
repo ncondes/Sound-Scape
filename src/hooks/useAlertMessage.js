@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectAuthMessage } from '@/store/auth/auth.selector'
+import { selectAuthMessage } from '@/store/auth/auth.selectors'
 
 const dictionary = {
   'Firebase: Error (auth/user-not-found).': {
