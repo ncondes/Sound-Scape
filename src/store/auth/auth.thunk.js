@@ -1,45 +1,52 @@
-import { loginUser, logoutFirebase, registerUser } from './auth.provider'
-import { checkingCredentials, login, logout, register, setMessage } from './auth.slice'
+import { getFirebaseErrorMessage } from '@/firebase/errors'
+import { showAlert } from '../alert/alert.thunk'
+import { closeModal } from '../modal/modal.slice'
+import { loginUser, logoutUser, registerUser } from './auth.provider'
+import { checkingCredentials, login, logout, register } from './auth.slice'
+import { AlertVariants } from '../alert/alert.slice'
 
-export const chekingAuthentication = () => {
-  return async (dispatch) => {
+export const startLogin =
+  ({ email, password }) =>
+  async (dispatch) => {
+    // set status to checking
     dispatch(checkingCredentials())
-  }
-}
-
-export const startLogin = ({ email, password }) => {
-  return async (dispatch) => {
-    dispatch(checkingCredentials())
-
+    // make request
     const resp = await loginUser({ email, password })
-    if (!resp.ok) {
-      dispatch(setMessage(resp.errorMessage))
+    // handle unsuccessful response
+    if (!resp.success) {
+      const message = getFirebaseErrorMessage(resp.errorMessage)
       dispatch(logout())
+      dispatch(showAlert({ message, variant: AlertVariants.ERROR }))
       return
     }
-
+    // handle successful response
     dispatch(login())
+    dispatch(closeModal())
+    dispatch(showAlert({ message: 'Login successful', variant: AlertVariants.SUCCESS }))
   }
-}
 
-export const startCreatingUser = (userData) => {
-  return async (dispatch) => {
-    dispatch(checkingCredentials())
-
-    const resp = await registerUser(userData)
-    if (!resp.ok) {
-      dispatch(setMessage(resp.errorMessage))
-      dispatch(logout())
-      return
-    }
-
-    dispatch(register())
-  }
-}
-
-export const startLogout = () => {
-  return async (dispatch) => {
-    await logoutFirebase()
+export const startCreatingUser = (userData) => async (dispatch) => {
+  // set status to checking
+  dispatch(checkingCredentials())
+  // make request
+  const resp = await registerUser(userData)
+  // handle unsuccessful response
+  if (!resp.success) {
+    const message = getFirebaseErrorMessage(resp.errorMessage)
     dispatch(logout())
+    dispatch(showAlert({ message, variant: AlertVariants.ERROR }))
+    return
   }
+  // handle successful response
+  dispatch(register())
+  dispatch(closeModal())
+  dispatch(showAlert({ message: 'Registration successful', variant: AlertVariants.SUCCESS }))
+}
+
+export const startLogout = () => async (dispatch) => {
+  // make request
+  await logoutUser()
+  // handle successful response
+  dispatch(logout())
+  dispatch(showAlert({ message: 'Logout successful', variant: AlertVariants.SUCCESS }))
 }

@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form'
-import { InputField } from './InputField'
-import { useDispatch, useSelector } from 'react-redux'
-import { Alert } from '../alert/Alert'
 import { useMemo } from 'react'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { InputField } from './InputField'
+import { selectAuthStatus } from '@/store/auth/auth.selectors'
 import { startCreatingUser } from '@/store/auth/auth.thunk'
-import { useAlertMessage } from '@/hooks'
+import { Status } from '@/store/auth/auth.slice'
 
 const schema = {
   name: {
@@ -64,21 +64,17 @@ export const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm()
-
   const dispatch = useDispatch()
-  const { status } = useSelector((state) => state.auth)
-  const { message, variant, showAlert, displayAlert } = useAlertMessage()
-  const isAuthenticating = useMemo(() => status === 'checking', [status])
+  const status = useSelector(selectAuthStatus)
+  const checking = useMemo(() => status === Status.CHECKING, [status])
 
   const onSubmit = (data) => {
     dispatch(startCreatingUser(data))
-    displayAlert()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col my-1">
-        {showAlert ? <Alert message={message} variant={variant} /> : null}
         {/* name */}
         <InputField
           label="Name"
@@ -136,13 +132,13 @@ export const Register = () => {
       </div>
       <div className="mt-2 text-center">
         <button
-          className={`block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 cursor-pointer ${
-            isAuthenticating ? 'opacity-50 cursor-not-allowed' : ''
+          className={`block w-full bg-purple-500 text-white py-1.5 px-3 rounded transition hover:bg-purple-600 cursor-pointer ${
+            checking ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           type="submit"
-          disabled={isAuthenticating}
+          disabled={checking}
         >
-          Submit
+          {checking ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Submit'}
         </button>
       </div>
     </form>
