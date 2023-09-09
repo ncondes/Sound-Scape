@@ -1,11 +1,10 @@
-import { useForm } from 'react-hook-form'
-import { InputField } from './InputField'
-import { useDispatch, useSelector } from 'react-redux'
-import { startLogin } from '@/store/auth/auth.thunk'
-import { Alert } from '../alert/Alert'
 import { useMemo } from 'react'
-import { useAlertMessage } from '@/hooks'
-import { selectAuthStatus } from '../../store/auth/auth.selectors'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { InputField } from './InputField'
+import { startLogin } from '@/store/auth/auth.thunk'
+import { selectAuthStatus } from '@/store/auth/auth.selectors'
+import { Status } from '@/store/auth/auth.slice'
 
 const schema = {
   email: {
@@ -32,18 +31,16 @@ export const Login = () => {
   const { control, handleSubmit } = useForm()
   const dispatch = useDispatch()
   const status = useSelector(selectAuthStatus)
-  const { message, variant, showAlert, displayAlert } = useAlertMessage()
-  const isAuthenticating = useMemo(() => status === 'checking', [status])
+  const checking = useMemo(() => status === Status.CHECKING, [status])
 
   const onSubmit = (data) => {
     dispatch(startLogin(data))
-    displayAlert()
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-col my-1">
-        {showAlert ? <Alert message={message} variant={variant} /> : null}
+        {/* email */}
         <InputField
           label="Email"
           name="email"
@@ -64,13 +61,13 @@ export const Login = () => {
       </div>
       <div className="mt-2 text-center">
         <button
-          className={`block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700 cursor-pointer ${
-            isAuthenticating ? 'opacity-50 cursor-not-allowed' : ''
+          className={`block w-full bg-purple-500 text-white py-1.5 px-3 rounded transition hover:bg-purple-600 cursor-pointer ${
+            checking ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           type="submit"
-          disabled={isAuthenticating}
+          disabled={checking}
         >
-          Submit
+          {checking ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Submit'}
         </button>
       </div>
     </form>

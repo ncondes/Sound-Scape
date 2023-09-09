@@ -12,23 +12,23 @@ export const registerUser = async ({ email, password, name, age, country }) => {
       country,
     })
 
-    return { ok: true }
+    return { success: true }
   } catch (error) {
     const errorMessage = error.message
-    return { ok: false, errorMessage }
+    return { success: false, errorMessage }
   }
 }
 
 export const loginUser = async ({ email, password }) => {
   try {
     const credentials = await signInWithEmailAndPassword(auth, email, password)
-    return { ok: true }
+    return { success: true }
   } catch (error) {
     const errorMessage = error.message
-    return { ok: false, errorMessage }
+    return { success: false, errorMessage }
   }
 }
 
-export const logoutFirebase = async () => {
+export const logoutUser = async () => {
   return await signOut(auth)
 }
