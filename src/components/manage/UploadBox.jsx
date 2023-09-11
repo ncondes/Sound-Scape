@@ -30,7 +30,7 @@ export const UploadBox = () => {
           <hr className="my-6" />
           {/* progress bars */}
           {uploads.map((upload) => (
-            <UploadingSong key={upload.name} upload={upload} />
+            <UploadingSong key={upload.id} name={upload.name} progress={upload.progress} variant={upload.variant} />
           ))}
         </div>
       </div>

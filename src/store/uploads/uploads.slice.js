@@ -6,14 +6,14 @@ export const uploadsSlice = createSlice({
     uploads: [],
   },
   reducers: {
-    upload: (state, action) => {
+    uploadSong: (state, action) => {
       state.uploads.push(action.payload)
     },
     setUpload: (state, action) => {
-      console.log(state.uploads)
-      state.uploads.map((upload) => (upload.id === action.payload.id ? { ...upload, ...action.payload } : upload))
+      // use Object.assign to avoid incorrect serializing of the task
+      state.uploads.map((upload) => (upload.id === action.payload.id ? Object.assign(upload, action.payload) : upload))
     },
   },
 })
 
-export const { upload, setUpload } = uploadsSlice.actions
+export const { uploadSong, setUpload } = uploadsSlice.actions
