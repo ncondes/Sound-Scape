@@ -3,15 +3,17 @@ import { createSlice } from '@reduxjs/toolkit'
 export const uploadsSlice = createSlice({
   name: 'uploads',
   initialState: {
-    message: null,
-    status: 'not-uploading',
+    uploads: [],
   },
   reducers: {
-    uploadSong: (state) => {
-      state.message = 'Uploading...'
-      state.status = 'uploading'
+    upload: (state, action) => {
+      state.uploads.push(action.payload)
+    },
+    setUpload: (state, action) => {
+      console.log(state.uploads)
+      state.uploads.map((upload) => (upload.id === action.payload.id ? { ...upload, ...action.payload } : upload))
     },
   },
 })
 
-export const { uploadSong } = uploadsSlice.actions
+export const { upload, setUpload } = uploadsSlice.actions

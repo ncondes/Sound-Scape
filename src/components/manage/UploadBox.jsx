@@ -1,15 +1,15 @@
-import { useState } from 'react'
 import { UploadingSong } from './UploadingSong'
 import { handleUploadSong } from '../../store/uploads/uploads.thunk'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUploads } from '../../store/uploads/uploads.selectors'
 
 export const UploadBox = () => {
-  const [uploads, setUploads] = useState([])
+  const uploads = useSelector(selectUploads)
   const dispatch = useDispatch()
 
   const handleUpload = (event) => {
     const files = [...event.target.files]
-    dispatch(handleUploadSong(setUploads, files))
+    dispatch(handleUploadSong(files))
   }
 
   return (

@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { authSlice } from './auth/auth.slice'
 import { modalSlice } from './modal/modal.slice'
 import { uploadsSlice } from './uploads/uploads.slice'
@@ -9,4 +9,5 @@ export const store = configureStore({
     auth: authSlice.reducer,
     uploads: uploadsSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })
