@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const modalSlice = createSlice({
-  name: 'modal',
+export const authModalSlice = createSlice({
+  name: 'auth-modal',
   initialState: {
     isOpen: false,
   },
@@ -15,4 +15,4 @@ export const modalSlice = createSlice({
   },
 })
 
-export const { openModal, closeModal } = modalSlice.actions
+export const { openModal, closeModal } = authModalSlice.actions
