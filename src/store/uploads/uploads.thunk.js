@@ -1,4 +1,5 @@
-import { startUploadingSong } from './uploads.provider'
+import { auth } from '../../firebase'
+import { setSong, startUploadingSong } from './uploads.provider'
 import { setUpload, uploadSong } from './uploads.slice'
 
 const Variants = {
@@ -37,7 +38,17 @@ export const handleUploadSong = (files) => async (dispatch) => {
         dispatch(setUpload(props))
       },
       // handle success
-      () => {
+      async () => {
+        const song = {
+          uid: auth.currentUser.uid,
+          title: task.snapshot.ref.name,
+          genre: '',
+          favorites: 0,
+          artist: [],
+        }
+        // add the song to the database
+        await setSong(song)
+
         const props = { id: item.id, variant: Variants.SUCCESS }
         dispatch(setUpload(props))
       },
