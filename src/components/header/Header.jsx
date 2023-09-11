@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { openModal } from '@/store/modal/modal.slice'
+import { openModal } from '@/store/auth-modal/authModal.slice'
 import { startLogout } from '@/store/auth/auth.thunk'
 import { selectIsUserLoggedIn } from '@/store/auth/auth.selectors'
 
@@ -7,7 +7,7 @@ export const Header = () => {
   const dispatch = useDispatch()
   const isUserLoggedIn = useSelector(selectIsUserLoggedIn)
 
-  const handleOpen = () => {
+  const handleLoginRegister = () => {
     dispatch(openModal())
   }
 
@@ -44,7 +44,7 @@ export const Header = () => {
               </>
             ) : (
               <li>
-                <a className="cursor-pointer navbar-link px-3 text-white font-semibold" onClick={handleOpen}>
+                <a className="cursor-pointer navbar-link px-3 text-white font-semibold" onClick={handleLoginRegister}>
                   <i className="fa-solid fa-right-to-bracket mx-1 " />
                   Login / Register
                 </a>
