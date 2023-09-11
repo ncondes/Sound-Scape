@@ -2,6 +2,7 @@ import { selectAlertMessage, selectAlertVariant, selectIsAlertOpen } from '@/sto
 import { useDispatch, useSelector } from 'react-redux'
 import { closeAlert } from '@/store/alert/alert.slice'
 import { useRef } from 'react'
+import { createPortal } from 'react-dom'
 
 const Variants = {
   SUCCESS: { icon: 'fa-regular fa-circle-check', bg: 'bg-green-500', ibg: 'bg-green-700' },
@@ -34,7 +35,7 @@ export const Alert = () => {
 
   if (!isOpen) return null
 
-  return (
+  return createPortal(
     <article
       ref={alertRef}
       aria-atomic="true"
@@ -52,6 +53,7 @@ export const Alert = () => {
       >
         <i className="fas fa-times text-white" />
       </button>
-    </article>
+    </article>,
+    document.body,
   )
 }
