@@ -9,4 +9,5 @@ export const store = configureStore({
     auth: authSlice.reducer,
     uploads: uploadsSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
 })

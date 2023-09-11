@@ -15,6 +15,7 @@ const Variants = {
     bg: 'bg-blue-400',
   },
 }
+
 export const UploadingSong = ({ name, progress, variant }) => {
   const icon = Variants[variant]?.icon ?? ''
   const text = Variants[variant]?.text ?? ''
