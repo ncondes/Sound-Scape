@@ -4,6 +4,8 @@ import { startLogout } from '@/store/auth/auth.thunk'
 import { selectIsUserLoggedIn } from '@/store/auth/auth.selectors'
 
 export const Header = () => {
+
+
   const dispatch = useDispatch()
   const isUserLoggedIn = useSelector(selectIsUserLoggedIn)
 
