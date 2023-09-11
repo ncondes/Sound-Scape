@@ -61,7 +61,7 @@ export const Login = () => {
       </div>
       <div className="mt-2 text-center">
         <button
-          className={`block w-full bg-purple-500 text-white py-1.5 px-3 rounded transition hover:bg-purple-600 cursor-pointer ${
+          className={`w-full cursor-pointer bg-gradient-to-r from-violet-500 to-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-gradient-to-r hover:from-violet-600 hover:to-indigo-500 ${
             checking ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           type="submit"
