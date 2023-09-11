@@ -2,70 +2,53 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Login } from './Login'
 import { Register } from './Register'
-import { closeModal } from '@/store/modal/modal.slice'
-import { selectIsAuthModalOpen } from '@/store/modal/modal.selectors'
+import { closeModal } from '@/store/auth-modal/authModal.slice'
+import { selectIsAuthModalOpen } from '@/store/auth-modal/authModal.selectors'
+import { Dialog } from '../dialog/Dialog'
+
+const Tabs = {
+  LOGIN: 'LOGIN',
+  REGISTER: 'REGISTER',
+}
 
 export const AuthModal = () => {
   const dispatch = useDispatch()
-  const isOpen = useSelector(selectIsAuthModalOpen)
-  const [tab, setTab] = useState('login')
+  const open = useSelector(selectIsAuthModalOpen)
+  const [tab, setTab] = useState(Tabs.LOGIN)
 
   const handleClose = () => {
     dispatch(closeModal())
   }
 
-  if (!isOpen) return
+  const toggleTab = () => {
+    tab === Tabs.LOGIN ? setTab(Tabs.REGISTER) : setTab(Tabs.LOGIN)
+  }
+
+  if (!open) return
 
   return (
-    <div className="fixed z-10 inset-0 overflow-y-auto" id="modal">
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-        <div className="fixed inset-0 transition-opacity">
-          <div className="absolute inset-0 bg-gray-800 opacity-75" />
-        </div>
-        {/*  this element is to trick the browser into centering the modal contents */}
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          {/* add margin if you want to see some of the overlay behind the modal */}
-          <div className="py-4 text-left px-6">
-            {/* title */}
-            <div className="flex justify-between items-center pb-4">
-              <p className="text-2xl font-bold">Your Account</p>
-              {/* modal close button */}
-              <button className="cursor-pointer z-50" onClick={handleClose}>
-                <i className="fas fa-times" />
-              </button>
-            </div>
-
-            {/* <!-- tabs --> */}
-            <ul className="flex flex-wrap mb-4">
-              <li className="flex-auto text-center">
-                <a
-                  className={`cursor-pointer block rounded py-3 px-4 transition
-                              ${tab === 'login' ? 'hover:text-white text-white bg-blue-500' : ''}
-                              ${tab === 'register' ? 'hover:text-blue-500' : ''}`}
-                  onClick={() => setTab('login')}
-                >
-                  Login
-                </a>
-              </li>
-              <li className="flex-auto text-center">
-                <a
-                  className={`cursor-pointer block rounded py-3 px-4 transition
-                              ${tab === 'register' ? 'hover:text-white text-white bg-blue-500' : ''}
-                              ${tab === 'login' ? 'hover:text-blue-500' : ''}`}
-                  onClick={() => setTab('register')}
-                >
-                  Register
-                </a>
-              </li>
-            </ul>
-
-            {tab === 'login' ? <Login /> : null}
-            {tab === 'register' ? <Register /> : null}
-          </div>
-        </div>
+    <Dialog open={open} onClose={handleClose} className="w-96">
+      <div className="p-8 relative">
+        {/* modal close button */}
+        <button
+          aria-label="Close"
+          className={`cursor-pointer absolute right-2 top-2 w-6 h-6 rounded-full hover:bg-neutral-500 hover:bg-opacity-30`}
+          onClick={handleClose}
+        >
+          <i className="fas fa-times" />
+        </button>
+        {/* title */}
+        <h1 className="text-center text-2xl font-bold mb-4">{tab === Tabs.LOGIN ? 'Login' : 'Register'}</h1>
+        {/* form */}
+        {tab === Tabs.LOGIN ? <Login /> : <Register />}
+        {/* login | register */}
+        <p className="text-sm text-center mt-4">
+          {tab === Tabs.LOGIN ? 'Not in tune with us? ' : 'Already a member of the band? '}
+          <button className="text-blue-500 hover:text-blue-600" onClick={toggleTab}>
+            {tab === Tabs.LOGIN ? 'Sign in' : 'Log in'}
+          </button>
+        </p>
       </div>
-    </div>
+    </Dialog>
   )
 }

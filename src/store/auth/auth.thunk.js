@@ -1,6 +1,6 @@
 import { getFirebaseErrorMessage } from '@/firebase/errors'
 import { showAlert } from '../alert/alert.thunk'
-import { closeModal } from '../modal/modal.slice'
+import { closeModal } from '../auth-modal/authModal.slice'
 import { loginUser, logoutUser, registerUser } from './auth.provider'
 import { checkingCredentials, login, logout, register } from './auth.slice'
 import { AlertVariants } from '../alert/alert.slice'

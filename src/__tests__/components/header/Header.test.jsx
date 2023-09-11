@@ -3,7 +3,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { Header } from '@/components/header/Header'
 import { Provider } from 'react-redux'
 import { store } from '@/store'
-import { openModal } from '@/store/modal/modal.slice'
+import { openModal } from '@/store/auth-modal/authModal.slice'
 import { startLogout } from '@/store/auth/auth.thunk'
 
 describe('Header', () => {
