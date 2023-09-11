@@ -1,35 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+export const Status = {
+  CHECKING: 'CHECKING',
+  AUTHENTICATED: 'AUTHENTICATED',
+  NOT_AUTHENTICATED: 'NOT_AUTHENTICATED',
+}
+
 export const authSlice = createSlice({
   name: 'user',
   initialState: {
     isUserLoggedIn: false,
-    message: null,
-    status: 'not-authenticated', // cheking, not authenticated, authenticated
+    status: Status.NOT_AUTHENTICATED,
   },
   reducers: {
     register: (state) => {
       state.isUserLoggedIn = true
-      state.message = 'Register successful'
-      state.status = 'authenticated'
+      state.status = Status.AUTHENTICATED
     },
     login: (state) => {
       state.isUserLoggedIn = true
-      state.message = 'Login successful'
-      state.status = 'authenticated'
+      state.status = Status.AUTHENTICATED
     },
     logout: (state) => {
       state.isUserLoggedIn = false
-      state.status = 'not-authenticated'
+      state.status = Status.NOT_AUTHENTICATED
     },
     checkingCredentials: (state) => {
-      state.message = 'Checking...'
-      state.status = 'checking'
-    },
-    setMessage: (state, action) => {
-      state.message = action.payload
+      state.status = Status.CHECKING
     },
   },
 })
 
-export const { register, login, logout, checkingCredentials, setMessage } = authSlice.actions
+export const { register, login, logout, checkingCredentials } = authSlice.actions

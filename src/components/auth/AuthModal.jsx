@@ -42,8 +42,8 @@ export const AuthModal = () => {
               <li className="flex-auto text-center">
                 <a
                   className={`cursor-pointer block rounded py-3 px-4 transition
-                              ${tab === 'login' ? 'hover:text-white text-white bg-blue-600' : ''}
-                              ${tab === 'register' ? 'hover:text-blue-600' : ''}`}
+                              ${tab === 'login' ? 'hover:text-white text-white bg-blue-500' : ''}
+                              ${tab === 'register' ? 'hover:text-blue-500' : ''}`}
                   onClick={() => setTab('login')}
                 >
                   Login
@@ -52,8 +52,8 @@ export const AuthModal = () => {
               <li className="flex-auto text-center">
                 <a
                   className={`cursor-pointer block rounded py-3 px-4 transition
-                              ${tab === 'register' ? 'hover:text-white text-white bg-blue-600' : ''}
-                              ${tab === 'login' ? 'hover:text-blue-600' : ''}`}
+                              ${tab === 'register' ? 'hover:text-white text-white bg-blue-500' : ''}
+                              ${tab === 'login' ? 'hover:text-blue-500' : ''}`}
                   onClick={() => setTab('register')}
                 >
                   Register

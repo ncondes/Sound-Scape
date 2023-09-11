@@ -1,58 +1,85 @@
 a {
-   transition: all 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .navbar-link:hover {
-   /* text-amber-500 */
-   color: #f59e0b;
-   text-decoration: none;
+  /* text-amber-500 */
+  color: #f59e0b;
+  text-decoration: none;
 }
 
 .card-header .fa.text-orange,
 .card .card-header .fas.text-orange {
-   color: #ff5e3a;
-   fill: #ff5e3a;
+  color: #ff5e3a;
+  fill: #ff5e3a;
 }
 
 .introduction-bg {
-   animation: slide 50s linear infinite;
-   will-change: background-position;
-   z-index: -1;
+  animation: slide 50s linear infinite;
+  will-change: background-position;
+  z-index: -1;
 }
 
 .progress-bar {
-   background-size: 1rem 1rem;
-   background-image: linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.15) 25%,
-      transparent 25%,
-      transparent 50%,
-      rgba(255, 255, 255, 0.15) 50%,
-      rgba(255, 255, 255, 0.15) 75%,
-      transparent 75%,
-      transparent
-   );
-   animation: progress-bar-stripes 1s linear infinite;
+  background-size: 1rem 1rem;
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.15) 75%,
+    transparent 75%,
+    transparent
+  );
+  animation: progress-bar-stripes 1s linear infinite;
 }
 
 @keyframes progress-bar-stripes {
-   0% {
-      background-position: 1rem 0;
-   }
-   100% {
-      background-position: 0 0;
-   }
+  0% {
+    background-position: 1rem 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
 
 @keyframes slide {
-   0% {
-      background-position: 0 0;
-   }
-   100% {
-      background-position: -4000px 0;
-   }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -4000px 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in-animation {
+  animation: slide-in 0.3s ease-in-out;
+}
+
+/* Animation for sliding out */
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.slide-out-animation {
+  animation: slide-out 0.3s ease-in-out;
 }
 
 :root {
-   background-color: #f3f4f6;
+  background-color: #f3f4f6;
 }
