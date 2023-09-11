@@ -2,7 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { describe, expect, test } from 'vitest'
 import { AuthModal } from '@/components/auth/AuthModal'
-import { closeModal } from '@/store/modal/modal.slice'
+import { closeModal } from '@/store/auth-modal/authModal.slice'
 
 describe('AuthModal', () => {
   test('renders the modal when isOpen is true', () => {
