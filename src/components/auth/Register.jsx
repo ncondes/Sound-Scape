@@ -107,13 +107,13 @@ export const Register = () => {
         />
         {/* country */}
         <div className="mb-3">
-          <label className="inline-block mb-2">Country</label>
+          <label className="inline-block font-medium text-sm mb-1">Country</label>
           <select
             {...register('country', schema.country)}
             className="block w-full border border-gray-300 text-gray-800 py-1.5 px-3 transition duration-500 focus:outline-none focus:border-black rounded"
           >
-            <option value="USA">USA</option>
             <option value="Colombia">Colombia</option>
+            <option value="USA">USA</option>
             <option value="Russia">Russia</option>
             <option value="Argentina">Argentina</option>
           </select>
@@ -132,7 +132,7 @@ export const Register = () => {
       </div>
       <div className="mt-2 text-center">
         <button
-          className={`block w-full bg-purple-500 text-white py-1.5 px-3 rounded transition hover:bg-purple-600 cursor-pointer ${
+          className={`w-full cursor-pointer bg-gradient-to-r from-violet-500 to-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-gradient-to-r hover:from-violet-600 hover:to-indigo-500 ${
             checking ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           type="submit"
