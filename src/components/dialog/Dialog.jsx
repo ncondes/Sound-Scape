@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useClickOutside } from '../../hooks'
 import { createPortal } from 'react-dom'
 
@@ -19,6 +20,10 @@ export const Dialog = ({ open, onClose, children, ...attributes }) => {
     if (attributes.className) result += ` ${attributes.className}`
     return result
   }
+  // disable scrolling when modal is open
+  useEffect(() => {
+    open ? (document.body.style.overflow = 'hidden') : (document.body.style.overflow = 'auto')
+  }, [open])
 
   if (!open) return
 
