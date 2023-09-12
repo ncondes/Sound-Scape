@@ -13,13 +13,7 @@ export const uploadsSlice = createSlice({
       // use Object.assign to avoid incorrect serializing of the task
       state.uploads.map((upload) => (upload.id === action.payload.id ? Object.assign(upload, action.payload) : upload))
     },
-    removeUpload: (state, action) => {
-      state.uploads = state.uploads.filter((upload) => upload.id !== action.payload)
-    },
-    clearUploads: (state) => {
-      state.uploads = []
-    },
   },
 })
 
-export const { uploadSong, setUpload, removeUpload, clearUploads } = uploadsSlice.actions
+export const { uploadSong, setUpload } = uploadsSlice.actions
