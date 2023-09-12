@@ -1,6 +1,6 @@
 import { auth } from '../../firebase'
 import { setSong, startUploadingSong } from './uploads.provider'
-import { setUpload, uploadSong } from './uploads.slice'
+import { removeUpload, setUpload, uploadSong } from './uploads.slice'
 
 const Variants = {
   SUCCESS: 'SUCCESS',
@@ -51,6 +51,10 @@ export const handleUploadSong = (files) => async (dispatch) => {
 
         const props = { id: item.id, variant: Variants.SUCCESS }
         dispatch(setUpload(props))
+        // remove the item from the store after 1 second
+        setTimeout(() => {
+          dispatch(removeUpload(item.id))
+        }, 1000)
       },
     )
   })

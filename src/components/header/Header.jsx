@@ -4,8 +4,6 @@ import { startLogout } from '@/store/auth/auth.thunk'
 import { selectIsUserLoggedIn } from '@/store/auth/auth.selectors'
 
 export const Header = () => {
-
-
   const dispatch = useDispatch()
   const isUserLoggedIn = useSelector(selectIsUserLoggedIn)
 
@@ -18,7 +16,7 @@ export const Header = () => {
   }
 
   return (
-    <header className="bg-gray-700">
+    <header className="sticky top-0 z-10 bg-gray-700">
       <nav className="container mx-auto flex justify-between items-center py-5 px-4">
         {/* app name */}
         <a href="/">
