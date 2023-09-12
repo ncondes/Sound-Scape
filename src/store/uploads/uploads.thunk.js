@@ -51,10 +51,10 @@ export const handleUploadSong = (files) => async (dispatch) => {
 
         const props = { id: item.id, variant: Variants.SUCCESS }
         dispatch(setUpload(props))
-        // remove the item from the store after 3 seconds
+        // remove the item from the store after 1 second
         setTimeout(() => {
           dispatch(removeUpload(item.id))
-        }, 3000)
+        }, 1000)
       },
     )
   })
