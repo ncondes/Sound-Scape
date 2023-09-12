@@ -14,7 +14,7 @@ a {
   fill: #ff5e3a;
 }
 
-.introduction-bg {
+.animation-bg {
   animation: slide 50s linear infinite;
   will-change: background-position;
   z-index: -1;
