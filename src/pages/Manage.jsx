@@ -3,6 +3,7 @@ import { InputField } from '../components/manage/InputField'
 import { openModal } from '../store/upload-modal/uploadModal.slice'
 import { useDispatch } from 'react-redux'
 import { UploadDialog } from '../components/manage/UploadDialog'
+import { Button } from '../components/button/Button'
 
 export const ManagePage = () => {
   const dispatch = useDispatch()
@@ -13,10 +14,9 @@ export const ManagePage = () => {
 
   return (
     <section className="relative">
-      {/* // TODO: rename introduction-bg class to background-image-animation or something similar */}
       {/* background animation */}
       <div
-        className="w-full bg-contain bg-center h-40 introduction-bg"
+        className="w-full bg-contain bg-center h-40 animation-bg"
         style={{ backgroundImage: "url('assets/img/manage-background.png')" }}
       />
       {/* body */}
@@ -30,19 +30,15 @@ export const ManagePage = () => {
         {/* body header */}
         <section className="flex justify-between mb-10">
           <h2 className="text-3xl font-semibold">Songs</h2>
-          {/* // TODO: create a reusable button component with the styles */}
           <div className="flex gap-5">
             <InputField type="text" placeholder="Search" />
-            <button
-              className="rounded text-white py-1.5 px-6 bg-gradient-to-r from-violet-500 to-indigo-400 hover:bg-gradient-to-r hover:from-violet-600 hover:to-indigo-500"
-              onClick={handleUploadSongs}
-            >
+            <Button variant="contained" className="py-1.5 px-6" onClick={handleUploadSongs}>
               <i className="fa-solid fa-plus mr-2"></i>
               Upload Songs
-            </button>
+            </Button>
           </div>
         </section>
-
+        {/* list */}
         <SongList />
       </div>
       {/* upload songs dialog */}
