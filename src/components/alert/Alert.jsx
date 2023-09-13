@@ -1,8 +1,7 @@
-import { selectAlertMessage, selectAlertVariant, selectIsAlertOpen } from '@/store/alert/alert.selectors'
 import { useDispatch, useSelector } from 'react-redux'
-import { closeAlert } from '@/store/alert/alert.slice'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { AlertActions, AlertSelectors } from '../../store/alert'
 
 const Variants = {
   SUCCESS: { icon: 'fa-regular fa-circle-check', bg: 'bg-green-500', ibg: 'bg-green-700' },
@@ -16,9 +15,9 @@ export const Alert = () => {
   const alertRef = useRef(null)
   const dispatch = useDispatch()
   // get the alert message, and variant from the store
-  const message = useSelector(selectAlertMessage)
-  const variant = useSelector(selectAlertVariant)
-  const isOpen = useSelector(selectIsAlertOpen)
+  const isOpen = useSelector(AlertSelectors.selectIsOpen)
+  const message = useSelector(AlertSelectors.selectMessage)
+  const variant = useSelector(AlertSelectors.selectVariant)
   // get the background, icon, and icon background based on the variant
   const bg = variant ? Variants[variant].bg : ''
   const ibg = variant ? Variants[variant].ibg : ''
@@ -26,12 +25,26 @@ export const Alert = () => {
   // close the alert by clicking on the close button
   const handleClose = () => {
     if (alertRef.current) {
+      // add the slide-out-animation class to the alert element
       alertRef.current.classList.add('slide-out-animation')
       setTimeout(() => {
-        dispatch(closeAlert())
+        // close the alert with a delay of 300ms to allow the animation to finish
+        dispatch(AlertActions.closeAlert())
       }, 300)
     }
   }
+
+  useEffect(() => {
+    let timer
+    // if the alert is open, set a timer to close it after 5 seconds
+    if (isOpen) {
+      timer = setTimeout(() => {
+        handleClose()
+      }, 5000)
+    }
+    // clear the timer when the component unmounts
+    return () => clearTimeout(timer)
+  }, [isOpen])
 
   if (!isOpen) return null
 

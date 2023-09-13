@@ -1,3 +1,5 @@
-export const selectIsAlertOpen = (state) => state.alert.isOpen
-export const selectAlertMessage = (state) => state.alert.message
-export const selectAlertVariant = (state) => state.alert.variant
+export class AlertSelectors {
+  static selectIsOpen = (state) => state.alert.isOpen
+  static selectMessage = (state) => state.alert.message
+  static selectVariant = (state) => state.alert.variant
+}
