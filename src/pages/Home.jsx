@@ -1,5 +1,5 @@
 import { Introduction } from '@/components/introduction/Introduction'
-import { SongList } from '@/components/home-page/SongList'
+import { SongList } from '@/components/songs/SongList'
 
 export const HomePage = () => {
   return (

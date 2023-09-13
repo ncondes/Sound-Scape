@@ -1,8 +1,14 @@
+import { useEffect, useState } from 'react'
+import { getAllSongs } from '../helpers/getAllSongs'
 import { SongItem } from './SongItem'
-import { useSongs } from '../../hooks'
 
 export const SongList = () => {
-  const { songs, loading, error } = useSongs()
+  const [songs, setSongs] = useState([])
+  useEffect(() => {
+    getAllSongs().then((result) => {
+      setSongs(result)
+    })
+  }, [])
 
   return (
     <section className="container mx-auto">

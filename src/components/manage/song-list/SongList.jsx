@@ -4,7 +4,6 @@ import { selectSongs } from '../../../store/manage-songs/manageSongs.selectors'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleGetSongs } from '../../../store/manage-songs/manageSongs.thunk'
 import { useEffect } from 'react'
-import { SongsService } from '../../../services/songs.service'
 
 export const SongList = () => {
   const columns = [
@@ -34,10 +33,7 @@ export const SongList = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // dispatch(handleGetSongs())
-    SongsService.getUserSongs().then((resp) => {
-      console.log({ resp })
-    })
+    dispatch(handleGetSongs())
   }, [])
 
   return (
