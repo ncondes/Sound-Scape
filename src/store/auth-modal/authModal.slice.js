@@ -15,4 +15,7 @@ export const authModalSlice = createSlice({
   },
 })
 
-export const { openModal, closeModal } = authModalSlice.actions
+export class AuthModalActions {
+  static openModal = authModalSlice.actions.openModal
+  static closeModal = authModalSlice.actions.closeModal
+}

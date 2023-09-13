@@ -1,1 +1,3 @@
-export const selectIsAuthModalOpen = (state) => state['auth-modal'].isOpen
+export class AuthModalSelectors {
+  static selectIsOpen = (state) => state['auth-modal'].isOpen
+}
