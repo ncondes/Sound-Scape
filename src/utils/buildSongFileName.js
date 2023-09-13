@@ -4,5 +4,5 @@ export const buildSongFileName = (file) => {
   file = file.replace('.mpeg', '')
   const id = crypto.randomUUID().split('-')[1]
 
-  return `${result}-[${id}]`
+  return `${file}-[${id}]`
 }
