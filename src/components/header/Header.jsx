@@ -1,18 +1,19 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { openModal } from '@/store/auth-modal/authModal.slice'
-import { startLogout } from '@/store/auth/auth.thunk'
-import { selectIsUserLoggedIn } from '@/store/auth/auth.selectors'
+import { AuthSelectors, AuthStatus, AuthThunk } from '../../store/auth'
+import { useMemo } from 'react'
 
 export const Header = () => {
   const dispatch = useDispatch()
-  const isUserLoggedIn = useSelector(selectIsUserLoggedIn)
+  const status = useSelector(AuthSelectors.selectStatus)
+  const isAuthenticated = useMemo(() => status === AuthStatus.AUTHENTICATED, [status])
 
   const handleLoginRegister = () => {
     dispatch(openModal())
   }
 
   const handleLogOut = () => {
-    dispatch(startLogout())
+    dispatch(AuthThunk.logout())
   }
 
   return (
@@ -26,7 +27,7 @@ export const Header = () => {
         </a>
         <div className="flex items-center">
           <ul className="flex flex-row mt-1">
-            {isUserLoggedIn ? (
+            {isAuthenticated ? (
               <>
                 {/* navigation links */}
                 <li>
