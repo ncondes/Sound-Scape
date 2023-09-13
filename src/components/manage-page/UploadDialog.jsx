@@ -1,17 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Dialog } from '../dialog/Dialog'
-import { selectUploads } from '../../store/uploads/uploads.selectors'
-import { handleUploadSong } from '../../store/uploads/uploads.thunk'
 import { useRef } from 'react'
 import { SongUploadProgress } from './SongUploadProgress'
 import classes from '../../styles/manage.module.css'
 import { UploadSongsModalActions, UploadSongsModalSelectors } from '../../store/upload-songs-modal'
+import { useUploadSongs } from '../../hooks'
+import { handleGetSongs } from '../../store/manage-songs/manageSongs.thunk'
 
 export const UploadDialog = () => {
+  const { uploads, handleUpload } = useUploadSongs()
   const dispatch = useDispatch()
-
-  const uploads = useSelector(selectUploads)
-  const open = useSelector(UploadSongsModalSelectors.selectIsUploadModalOpen)
+  const isOpen = useSelector(UploadSongsModalSelectors.selectIsUploadModalOpen)
 
   const inputRef = useRef(null)
   const wrapperRef = useRef(null)
@@ -20,9 +19,11 @@ export const UploadDialog = () => {
     dispatch(UploadSongsModalActions.closeModal())
   }
 
-  const handleUpload = (event) => {
+  const handleUploadFiles = async (event) => {
+    // convert file list to array
     const files = [...event.target.files]
-    dispatch(handleUploadSong(files))
+    await handleUpload(files)
+    dispatch(handleGetSongs())
   }
 
   const handleUploadButtonClick = () => {
@@ -43,7 +44,7 @@ export const UploadDialog = () => {
   }
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose}>
       <div className="w-96 p-8 relative">
         {/* modal close button */}
         <button
@@ -71,7 +72,7 @@ export const UploadDialog = () => {
             type="file"
             multiple
             accept="audio/mpeg, audio/mp3"
-            onChange={handleUpload}
+            onChange={handleUploadFiles}
           />
         </div>
         {/* file input */}

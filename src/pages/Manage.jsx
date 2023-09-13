@@ -1,7 +1,7 @@
-import { SongList } from '../components/manage/song-list/SongList'
-import { InputField } from '../components/manage/InputField'
+import { SongList } from '../components/manage-page/SongList'
+import { InputField } from '../components/manage-page/InputField'
 import { useDispatch } from 'react-redux'
-import { UploadDialog } from '../components/manage/UploadDialog'
+import { UploadDialog } from '../components/manage-page/UploadDialog'
 import { Button } from '../components/button/Button'
 import { UploadSongsModalActions } from '../store/upload-songs-modal'
 

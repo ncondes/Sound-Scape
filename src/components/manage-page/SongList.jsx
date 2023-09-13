@@ -1,34 +1,34 @@
 import { SongItem } from './SongItem'
-import classes from '../../../styles/manage.module.css'
-import { selectSongs } from '../../../store/manage-songs/manageSongs.selectors'
+import classes from '../../styles/manage.module.css'
+import { selectSongs } from '../../store/manage-songs/manageSongs.selectors'
 import { useDispatch, useSelector } from 'react-redux'
-import { handleGetSongs } from '../../../store/manage-songs/manageSongs.thunk'
+import { handleGetSongs } from '../../store/manage-songs/manageSongs.thunk'
 import { useEffect } from 'react'
 
-export const SongList = () => {
-  const columns = [
-    {
-      name: 'Title',
-      align: 'text-left',
-    },
-    {
-      name: 'Artist',
-      align: 'text-left',
-    },
-    {
-      name: 'Genre',
-      align: 'text-left',
-    },
-    {
-      name: 'Favorites',
-      align: 'text-center',
-    },
-    {
-      name: 'Details',
-      align: 'text-center',
-    },
-  ]
+const columns = [
+  {
+    name: 'Title',
+    align: 'text-left',
+  },
+  {
+    name: 'Artist',
+    align: 'text-left',
+  },
+  {
+    name: 'Genre',
+    align: 'text-left',
+  },
+  {
+    name: 'Favorites',
+    align: 'text-center',
+  },
+  {
+    name: 'Details',
+    align: 'text-center',
+  },
+]
 
+export const SongList = () => {
   const songs = useSelector(selectSongs)
   const dispatch = useDispatch()
 

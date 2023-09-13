@@ -1,7 +1,7 @@
 import { addDoc, collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
 import { auth, db, storage } from '../firebase'
 import { buildSongFileName } from '../utils'
-import { ref } from 'firebase/storage'
+import { ref, uploadBytesResumable } from 'firebase/storage'
 
 export class SongsService {
   static async getSongs() {
@@ -85,6 +85,8 @@ export class SongsService {
           return { success: true, data: null, error: null }
         },
       )
+
+      return { success: true, data: null, error: null }
     } catch (error) {
       return { success: false, data: null, error: error.message }
     }
