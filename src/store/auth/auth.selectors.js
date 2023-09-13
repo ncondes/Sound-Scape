@@ -1,2 +1,3 @@
-export const selectIsUserLoggedIn = (state) => state.auth.isUserLoggedIn
-export const selectAuthStatus = (state) => state.auth.status
+export class AuthSelectors {
+  static selectStatus = (state) => state.auth.status
+}
