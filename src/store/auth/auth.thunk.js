@@ -1,5 +1,5 @@
 import { getFirebaseErrorMessage } from '@/firebase/errors'
-import { closeModal } from '../auth-modal/authModal.slice'
+import { AuthModalActions } from '../auth-modal/authModal.slice'
 import { AuthActions } from './auth.slice'
 import { AlertActions, AlertVariants } from '../alert'
 import { createAsyncThunk } from '@reduxjs/toolkit'
@@ -25,8 +25,8 @@ export class AuthThunk {
     thunkAPI.dispatch(AuthActions.login())
     // show success alert
     thunkAPI.dispatch(AlertActions.showAlert({ message: 'Login successful', variant: AlertVariants.SUCCESS }))
-    // TODO: close modal with action
-    thunkAPI.dispatch(closeModal())
+    // close auth modal
+    thunkAPI.dispatch(AuthModalActions.closeModal())
   })
 
   static register = createAsyncThunk('auth/register', async (payload, thunkAPI) => {
@@ -48,8 +48,8 @@ export class AuthThunk {
     thunkAPI.dispatch(AuthActions.login())
     // show success alert
     thunkAPI.dispatch(AlertActions.showAlert({ message: 'Registration successful', variant: AlertVariants.SUCCESS }))
-    // TODO: close modal with action
-    thunkAPI.dispatch(closeModal())
+    // close auth modal
+    thunkAPI.dispatch(AuthModalActions.closeModal())
   })
 
   static logout = createAsyncThunk('auth/logout', async (payload, thunkAPI) => {

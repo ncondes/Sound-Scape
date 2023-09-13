@@ -25,7 +25,7 @@ export const authSlice = createSlice({
 })
 
 export class AuthActions {
-  static login = () => authSlice.actions.login
-  static logout = () => authSlice.actions.logout
-  static checking = () => authSlice.actions.checking
+  static login = authSlice.actions.login
+  static logout = authSlice.actions.logout
+  static checking = authSlice.actions.checking
 }
