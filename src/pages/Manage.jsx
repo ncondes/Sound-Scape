@@ -1,15 +1,15 @@
 import { SongList } from '../components/manage/song-list/SongList'
 import { InputField } from '../components/manage/InputField'
-import { openModal } from '../store/upload-modal/uploadModal.slice'
 import { useDispatch } from 'react-redux'
 import { UploadDialog } from '../components/manage/UploadDialog'
 import { Button } from '../components/button/Button'
+import { UploadSongsModalActions } from '../store/upload-songs-modal'
 
 export const ManagePage = () => {
   const dispatch = useDispatch()
 
   const handleUploadSongs = () => {
-    dispatch(openModal())
+    dispatch(UploadSongsModalActions.openModal())
   }
 
   return (

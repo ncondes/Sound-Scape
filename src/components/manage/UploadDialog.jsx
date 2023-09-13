@@ -1,24 +1,23 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { selectIsUploadModalOpen } from '../../store/upload-modal/uploadModal.selectors'
 import { Dialog } from '../dialog/Dialog'
 import { selectUploads } from '../../store/uploads/uploads.selectors'
 import { handleUploadSong } from '../../store/uploads/uploads.thunk'
 import { useRef } from 'react'
 import { SongUploadProgress } from './SongUploadProgress'
 import classes from '../../styles/manage.module.css'
-import { closeUploadModal } from '../../store/upload-modal/uploadModal.thunk'
+import { UploadSongsModalActions, UploadSongsModalSelectors } from '../../store/upload-songs-modal'
 
 export const UploadDialog = () => {
   const dispatch = useDispatch()
 
   const uploads = useSelector(selectUploads)
-  const open = useSelector(selectIsUploadModalOpen)
+  const open = useSelector(UploadSongsModalSelectors.selectIsUploadModalOpen)
 
   const inputRef = useRef(null)
   const wrapperRef = useRef(null)
 
   const handleClose = () => {
-    dispatch(closeUploadModal())
+    dispatch(UploadSongsModalActions.closeModal())
   }
 
   const handleUpload = (event) => {

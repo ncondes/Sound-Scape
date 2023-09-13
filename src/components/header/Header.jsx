@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { openModal } from '@/store/auth-modal/authModal.slice'
 import { AuthSelectors, AuthStatus, AuthThunk } from '../../store/auth'
 import { useMemo } from 'react'
+import { AuthModalActions } from '../../store/auth-modal'
 
 export const Header = () => {
   const dispatch = useDispatch()
@@ -9,7 +9,7 @@ export const Header = () => {
   const isAuthenticated = useMemo(() => status === AuthStatus.AUTHENTICATED, [status])
 
   const handleLoginRegister = () => {
-    dispatch(openModal())
+    dispatch(AuthModalActions.openModal())
   }
 
   const handleLogOut = () => {
