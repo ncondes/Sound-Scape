@@ -1,9 +1,8 @@
 import { getFirebaseErrorMessage } from '@/firebase/errors'
-import { showAlert } from '../alert/alert.thunk'
 import { closeModal } from '../auth-modal/authModal.slice'
 import { loginUser, logoutUser, registerUser } from './auth.provider'
 import { checkingCredentials, login, logout, register } from './auth.slice'
-import { AlertVariants } from '../alert/alert.slice'
+import { AlertActions, AlertVariants } from '../alert'
 
 export const startLogin =
   ({ email, password }) =>
@@ -16,13 +15,13 @@ export const startLogin =
     if (!resp.success) {
       const message = getFirebaseErrorMessage(resp.errorMessage)
       dispatch(logout())
-      dispatch(showAlert({ message, variant: AlertVariants.ERROR }))
+      dispatch(AlertActions.showAlert({ message, variant: AlertVariants.ERROR }))
       return
     }
     // handle successful response
     dispatch(login())
     dispatch(closeModal())
-    dispatch(showAlert({ message: 'Login successful', variant: AlertVariants.SUCCESS }))
+    dispatch(AlertActions.showAlert({ message: 'Login successful', variant: AlertVariants.SUCCESS }))
   }
 
 export const startCreatingUser = (userData) => async (dispatch) => {
@@ -34,13 +33,13 @@ export const startCreatingUser = (userData) => async (dispatch) => {
   if (!resp.success) {
     const message = getFirebaseErrorMessage(resp.errorMessage)
     dispatch(logout())
-    dispatch(showAlert({ message, variant: AlertVariants.ERROR }))
+    dispatch(AlertActions.showAlert({ message, variant: AlertVariants.ERROR }))
     return
   }
   // handle successful response
   dispatch(register())
   dispatch(closeModal())
-  dispatch(showAlert({ message: 'Registration successful', variant: AlertVariants.SUCCESS }))
+  dispatch(AlertActions.showAlert({ message: 'Registration successful', variant: AlertVariants.SUCCESS }))
 }
 
 export const startLogout = () => async (dispatch) => {
@@ -48,5 +47,5 @@ export const startLogout = () => async (dispatch) => {
   await logoutUser()
   // handle successful response
   dispatch(logout())
-  dispatch(showAlert({ message: 'Logout successful', variant: AlertVariants.SUCCESS }))
+  dispatch(AlertActions.showAlert({ message: 'Logout successful', variant: AlertVariants.SUCCESS }))
 }

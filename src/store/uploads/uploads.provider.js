@@ -1,12 +1,12 @@
 import { storage } from '@/firebase'
 import { ref, uploadBytesResumable } from 'firebase/storage'
-import { buildSongRef } from '../../utils'
+import { buildSongFileName } from '../../utils'
 import { addDoc, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
 
 export const startUploadingSong = (file) => {
   // create a reference to the file in the storage bucket
-  const songRef = buildSongRef(file.name)
+  const songRef = buildSongFileName(file.name)
   const songsRef = ref(storage, `songs/${songRef}`)
   const task = uploadBytesResumable(songsRef, file)
   return task

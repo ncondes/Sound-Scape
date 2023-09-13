@@ -1,8 +1,8 @@
-import { SongList } from '../components/manage/song-list/SongList'
-import { InputField } from '../components/manage/InputField'
+import { SongList } from '../components/manage-page/song-list/SongList'
+import { InputField } from '../components/manage-page/InputField'
 import { openModal } from '../store/upload-modal/uploadModal.slice'
 import { useDispatch } from 'react-redux'
-import { UploadDialog } from '../components/manage/UploadDialog'
+import { UploadDialog } from '../components/manage-page/UploadDialog'
 import { Button } from '../components/button/Button'
 
 export const ManagePage = () => {
