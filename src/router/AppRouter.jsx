@@ -2,11 +2,12 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { HomePage, ManagePage, NotFoundPage } from '@/pages'
 
 import { PrivateRoute } from './PrivateRoute'
+import { ManageSongPage } from '../pages/ManageSong'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />
+    element: <HomePage />,
   },
   {
     path: '/manage',
@@ -14,12 +15,20 @@ const router = createBrowserRouter([
       <PrivateRoute>
         <ManagePage />
       </PrivateRoute>
-    )
+    ),
+  },
+  {
+    path: '/manage/:id',
+    element: (
+      <PrivateRoute>
+        <ManageSongPage />
+      </PrivateRoute>
+    ),
   },
   {
     path: '*',
-    element: <NotFoundPage />
-  }
+    element: <NotFoundPage />,
+  },
 ])
 
 export const AppRouter = () => {
