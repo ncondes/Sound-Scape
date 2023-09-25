@@ -1,1 +1,3 @@
-export const selectSongs = (state) => state['manage-songs'].songs
+export class ManageSongsSelectors {
+  static selectSongs = (state) => state['manage-songs'].songs
+}

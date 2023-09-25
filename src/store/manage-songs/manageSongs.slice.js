@@ -12,4 +12,6 @@ export const manageSongsSlice = createSlice({
   },
 })
 
-export const { setSongs } = manageSongsSlice.actions
+export class ManagaSongsActions {
+  static setSongs = manageSongsSlice.actions.setSongs
+}
