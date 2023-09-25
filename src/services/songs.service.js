@@ -1,4 +1,15 @@
-import { addDoc, collection, deleteDoc, getDocs, query, where } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+  serverTimestamp,
+  where,
+} from 'firebase/firestore'
 import { auth, db, storage } from '../firebase'
 import { buildSongFileName } from '../utils'
 import { ref, uploadBytesResumable } from 'firebase/storage'
@@ -21,16 +32,32 @@ export class SongsService {
     }
   }
 
+  static async getSong(id) {
+    try {
+      // create a reference to the songs collection
+      const songsRef = doc(db, 'songs', id)
+      // build the query
+      // execute the query
+      const snapshot = await getDoc(songsRef)
+      // build the song object
+      const song = { ...snapshot.data() }
+
+      return { success: true, data: song, error: null }
+    } catch (error) {
+      return { success: false, data: null, error: error.message }
+    }
+  }
+
   static async getUserSongs() {
     try {
       // create a reference to the songs collection
       const songsRef = collection(db, 'songs')
       // build the query
-      const q = query(songsRef, where('uid', '==', auth.currentUser.uid))
+      const q = query(songsRef, orderBy('created', 'desc'), where('uid', '==', auth.currentUser.uid))
       // execute the query
       const snapshot = await getDocs(q)
-      // map the snapshot to an array of songs
-      const songs = snapshot.docs.map((doc) => doc.data())
+      // map the snapshot to an array of songs with the id
+      const songs = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
 
       return { success: true, data: songs, error: null }
     } catch (error) {
@@ -49,6 +76,7 @@ export class SongsService {
         genre: '',
         artist: [],
         favorites: 0,
+        created: serverTimestamp(),
       }
       // create a reference to the songs collection
       const songsRef = collection(db, 'songs')
