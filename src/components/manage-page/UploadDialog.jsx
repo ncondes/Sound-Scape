@@ -5,7 +5,7 @@ import { SongUploadProgress } from './SongUploadProgress'
 import classes from '../../styles/manage.module.css'
 import { UploadSongsModalActions, UploadSongsModalSelectors } from '../../store/upload-songs-modal'
 import { useUploadSongs } from '../../hooks'
-import { handleGetSongs } from '../../store/manage-songs/manageSongs.thunk'
+import { ManageSongsThunk } from '../../store/manage-songs'
 
 export const UploadDialog = () => {
   const { uploads, handleUpload } = useUploadSongs()
@@ -23,7 +23,8 @@ export const UploadDialog = () => {
     // convert file list to array
     const files = [...event.target.files]
     await handleUpload(files)
-    dispatch(handleGetSongs())
+    // update songs list
+    dispatch(ManageSongsThunk.getSongs())
   }
 
   const handleUploadButtonClick = () => {

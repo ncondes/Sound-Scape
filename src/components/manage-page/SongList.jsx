@@ -1,9 +1,5 @@
 import { SongItem } from './SongItem'
 import classes from '../../styles/manage.module.css'
-import { selectSongs } from '../../store/manage-songs/manageSongs.selectors'
-import { useDispatch, useSelector } from 'react-redux'
-import { handleGetSongs } from '../../store/manage-songs/manageSongs.thunk'
-import { useEffect } from 'react'
 
 const columns = [
   {
@@ -28,14 +24,7 @@ const columns = [
   },
 ]
 
-export const SongList = () => {
-  const songs = useSelector(selectSongs)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(handleGetSongs())
-  }, [])
-
+export const SongList = ({ songs }) => {
   return (
     <section className="mt-4">
       <table width="100%">
@@ -52,7 +41,7 @@ export const SongList = () => {
         {/* rows */}
         <tbody className={classes['table__show-colored-rows']}>
           {songs.map((song) => (
-            <SongItem key={song.title} song={song} />
+            <SongItem key={song.id} song={song} />
           ))}
         </tbody>
       </table>
