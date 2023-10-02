@@ -7,16 +7,18 @@ export const AlertVariants = {
   WARNING: 'WARNING',
 }
 
+const initialState = {
+  isOpen: false,
+  message: '',
+  variant: '',
+}
+
 export const alertSlice = createSlice({
   name: 'alert',
-  initialState: {
-    isOpen: false,
-    message: '',
-    variant: '',
-  },
+  initialState,
   reducers: {
-    setAlert: (state, action) => {
-      state.isOpen = action.payload.isOpen
+    showAlert: (state, action) => {
+      state.isOpen = true
       state.message = action.payload.message
       state.variant = action.payload.variant
     },
@@ -28,4 +30,7 @@ export const alertSlice = createSlice({
   },
 })
 
-export const { setAlert, closeAlert } = alertSlice.actions
+export class AlertActions {
+  static showAlert = alertSlice.actions.showAlert
+  static closeAlert = alertSlice.actions.closeAlert
+}

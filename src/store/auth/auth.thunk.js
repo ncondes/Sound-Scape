@@ -1,52 +1,73 @@
 import { getFirebaseErrorMessage } from '@/firebase/errors'
-import { showAlert } from '../alert/alert.thunk'
-import { closeModal } from '../auth-modal/authModal.slice'
-import { loginUser, logoutUser, registerUser } from './auth.provider'
-import { checkingCredentials, login, logout, register } from './auth.slice'
-import { AlertVariants } from '../alert/alert.slice'
+import { AuthModalActions } from '../auth-modal/authModal.slice'
+import { AuthActions } from './auth.slice'
+import { AlertActions, AlertVariants } from '../alert'
+import { createAsyncThunk } from '@reduxjs/toolkit'
+import { AuthService } from '../../services'
 
-export const startLogin =
-  ({ email, password }) =>
-  async (dispatch) => {
+export class AuthThunk {
+  static login = createAsyncThunk('auth/login', async (payload, thunkAPI) => {
     // set status to checking
-    dispatch(checkingCredentials())
+    thunkAPI.dispatch(AuthActions.checking())
     // make request
-    const resp = await loginUser({ email, password })
-    // handle unsuccessful response
-    if (!resp.success) {
-      const message = getFirebaseErrorMessage(resp.errorMessage)
-      dispatch(logout())
-      dispatch(showAlert({ message, variant: AlertVariants.ERROR }))
+    const response = await AuthService.login(payload)
+    // ! handle unsuccessful response
+    if (!response.success) {
+      const message = getFirebaseErrorMessage(response.errorMessage)
+      // set status to not authenticated
+      thunkAPI.dispatch(AuthActions.logout())
+      // show error alert
+      thunkAPI.dispatch(AlertActions.showAlert({ message, variant: AlertVariants.ERROR }))
       return
     }
-    // handle successful response
-    dispatch(login())
-    dispatch(closeModal())
-    dispatch(showAlert({ message: 'Login successful', variant: AlertVariants.SUCCESS }))
-  }
+    // * handle successful response
+    // set status to authenticated
+    thunkAPI.dispatch(AuthActions.login())
+    // show success alert
+    thunkAPI.dispatch(AlertActions.showAlert({ message: 'Login successful', variant: AlertVariants.SUCCESS }))
+    // close auth modal
+    thunkAPI.dispatch(AuthModalActions.closeModal())
+  })
 
-export const startCreatingUser = (userData) => async (dispatch) => {
-  // set status to checking
-  dispatch(checkingCredentials())
-  // make request
-  const resp = await registerUser(userData)
-  // handle unsuccessful response
-  if (!resp.success) {
-    const message = getFirebaseErrorMessage(resp.errorMessage)
-    dispatch(logout())
-    dispatch(showAlert({ message, variant: AlertVariants.ERROR }))
-    return
-  }
-  // handle successful response
-  dispatch(register())
-  dispatch(closeModal())
-  dispatch(showAlert({ message: 'Registration successful', variant: AlertVariants.SUCCESS }))
-}
+  static register = createAsyncThunk('auth/register', async (payload, thunkAPI) => {
+    // set status to checking
+    thunkAPI.dispatch(AuthActions.checking())
+    // make request
+    const response = await AuthService.register(payload)
+    // ! handle unsuccessful response
+    if (!response.success) {
+      const message = getFirebaseErrorMessage(response.errorMessage)
+      // set status to not authenticated
+      thunkAPI.dispatch(AuthActions.logout())
+      // show error alert
+      thunkAPI.dispatch(AlertActions.showAlert({ message, variant: AlertVariants.ERROR }))
+      return
+    }
+    // * handle successful response
+    // set status to authenticated
+    thunkAPI.dispatch(AuthActions.login())
+    // show success alert
+    thunkAPI.dispatch(AlertActions.showAlert({ message: 'Registration successful', variant: AlertVariants.SUCCESS }))
+    // close auth modal
+    thunkAPI.dispatch(AuthModalActions.closeModal())
+  })
 
-export const startLogout = () => async (dispatch) => {
-  // make request
-  await logoutUser()
-  // handle successful response
-  dispatch(logout())
-  dispatch(showAlert({ message: 'Logout successful', variant: AlertVariants.SUCCESS }))
+  static logout = createAsyncThunk('auth/logout', async (payload, thunkAPI) => {
+    // make request
+    const response = await AuthService.logout()
+    // ! handle unsuccessful response
+    if (!response.success) {
+      const message = getFirebaseErrorMessage(response.errorMessage)
+      // set status to not authenticated
+      thunkAPI.dispatch(AuthActions.logout())
+      // show error alert
+      thunkAPI.dispatch(AlertActions.showAlert({ message, variant: AlertVariants.ERROR }))
+      return
+    }
+    // * handle successful response
+    // set status to not authenticated
+    thunkAPI.dispatch(AuthActions.logout())
+    // show success alert
+    thunkAPI.dispatch(AlertActions.showAlert({ message: 'Logout successful', variant: AlertVariants.SUCCESS }))
+  })
 }

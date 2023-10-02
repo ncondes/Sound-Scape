@@ -2,9 +2,7 @@ import { useMemo } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { InputField } from './InputField'
-import { startLogin } from '@/store/auth/auth.thunk'
-import { selectAuthStatus } from '@/store/auth/auth.selectors'
-import { Status } from '@/store/auth/auth.slice'
+import { AuthSelectors, AuthStatus, AuthThunk } from '../../store/auth'
 
 const schema = {
   email: {
@@ -30,11 +28,11 @@ const schema = {
 export const Login = () => {
   const { control, handleSubmit } = useForm()
   const dispatch = useDispatch()
-  const status = useSelector(selectAuthStatus)
-  const checking = useMemo(() => status === Status.CHECKING, [status])
+  const status = useSelector(AuthSelectors.selectStatus)
+  const isChecking = useMemo(() => status === AuthStatus.CHECKING, [status])
 
   const onSubmit = (data) => {
-    dispatch(startLogin(data))
+    dispatch(AuthThunk.login(data))
   }
 
   return (
@@ -62,12 +60,12 @@ export const Login = () => {
       <div className="mt-2 text-center">
         <button
           className={`w-full cursor-pointer bg-gradient-to-r from-violet-500 to-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-gradient-to-r hover:from-violet-600 hover:to-indigo-500 ${
-            checking ? 'opacity-50 cursor-not-allowed' : ''
+            isChecking ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           type="submit"
-          disabled={checking}
+          disabled={isChecking}
         >
-          {checking ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Submit'}
+          {isChecking ? <i className="fa-solid fa-spinner fa-spin"></i> : 'Submit'}
         </button>
       </div>
     </form>

@@ -2,9 +2,8 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Login } from './Login'
 import { Register } from './Register'
-import { closeModal } from '@/store/auth-modal/authModal.slice'
-import { selectIsAuthModalOpen } from '@/store/auth-modal/authModal.selectors'
 import { Dialog } from '../dialog/Dialog'
+import { AuthModalActions, AuthModalSelectors } from '../../store/auth-modal'
 
 const Tabs = {
   LOGIN: 'LOGIN',
@@ -13,21 +12,21 @@ const Tabs = {
 
 export const AuthModal = () => {
   const dispatch = useDispatch()
-  const open = useSelector(selectIsAuthModalOpen)
+  const isOpen = useSelector(AuthModalSelectors.selectIsOpen)
   const [tab, setTab] = useState(Tabs.LOGIN)
 
   const handleClose = () => {
-    dispatch(closeModal())
+    dispatch(AuthModalActions.closeModal())
   }
 
   const toggleTab = () => {
     tab === Tabs.LOGIN ? setTab(Tabs.REGISTER) : setTab(Tabs.LOGIN)
   }
 
-  if (!open) return
+  if (!isOpen) return
 
   return (
-    <Dialog open={open} onClose={handleClose} className="w-96">
+    <Dialog open={isOpen} onClose={handleClose} className="w-96">
       <div className="p-8 relative">
         {/* modal close button */}
         <button

@@ -23,8 +23,12 @@ export const SongItem = ({ song }) => {
       </td>
       {/* details */}
       <td className="text-center">
-        <a href={'#'} className="inline-block w-6 h-6 rounded-full hover:bg-neutral-500 hover:bg-opacity-30">
-          <i className="fa-solid fa-ellipsis"></i>
+        <a
+          href={`/manage/${song.id}`}
+          className="inline-block w-8 h-8 rounded-full hover:bg-neutral-500 hover:bg-opacity-30"
+        >
+          {/* // TODO: maybe use another color to highligh the action */}
+          <i className="fa-solid fa-pen mt-2"></i>
         </a>
       </td>
     </tr>

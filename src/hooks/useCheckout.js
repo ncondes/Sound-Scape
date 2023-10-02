@@ -1,21 +1,19 @@
 import { onAuthStateChanged } from 'firebase/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { auth } from '@/firebase'
 import { useEffect, useState } from 'react'
-import { login, logout } from '@/store/auth/auth.slice'
+import { AuthActions } from '../store/auth'
 
 export const useCheckout = () => {
   const [isLoading, setIsLoading] = useState(true)
-  const { status } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setIsLoading(false)
-
-      dispatch(!user ? logout() : login())
+      dispatch(!user ? AuthActions.logout() : AuthActions.login())
     })
   }, [])
 
-  return { status, isLoading }
+  return { isLoading }
 }

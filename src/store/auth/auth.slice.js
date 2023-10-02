@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-export const Status = {
+export const AuthStatus = {
   CHECKING: 'CHECKING',
   AUTHENTICATED: 'AUTHENTICATED',
   NOT_AUTHENTICATED: 'NOT_AUTHENTICATED',
@@ -9,26 +9,23 @@ export const Status = {
 export const authSlice = createSlice({
   name: 'user',
   initialState: {
-    isUserLoggedIn: false,
-    status: Status.NOT_AUTHENTICATED,
+    status: AuthStatus.NOT_AUTHENTICATED,
   },
   reducers: {
-    register: (state) => {
-      state.isUserLoggedIn = true
-      state.status = Status.AUTHENTICATED
-    },
     login: (state) => {
-      state.isUserLoggedIn = true
-      state.status = Status.AUTHENTICATED
+      state.status = AuthStatus.AUTHENTICATED
     },
     logout: (state) => {
-      state.isUserLoggedIn = false
-      state.status = Status.NOT_AUTHENTICATED
+      state.status = AuthStatus.NOT_AUTHENTICATED
     },
-    checkingCredentials: (state) => {
-      state.status = Status.CHECKING
+    checking: (state) => {
+      state.status = AuthStatus.CHECKING
     },
   },
 })
 
-export const { register, login, logout, checkingCredentials } = authSlice.actions
+export class AuthActions {
+  static login = authSlice.actions.login
+  static logout = authSlice.actions.logout
+  static checking = authSlice.actions.checking
+}

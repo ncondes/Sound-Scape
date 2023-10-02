@@ -1,29 +1,30 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { selectIsUploadModalOpen } from '../../store/upload-modal/uploadModal.selectors'
 import { Dialog } from '../dialog/Dialog'
-import { selectUploads } from '../../store/uploads/uploads.selectors'
-import { handleUploadSong } from '../../store/uploads/uploads.thunk'
 import { useRef } from 'react'
 import { SongUploadProgress } from './SongUploadProgress'
 import classes from '../../styles/manage.module.css'
-import { closeUploadModal } from '../../store/upload-modal/uploadModal.thunk'
+import { UploadSongsModalActions, UploadSongsModalSelectors } from '../../store/upload-songs-modal'
+import { useUploadSongs } from '../../hooks'
+import { ManageSongsThunk } from '../../store/manage-songs'
 
 export const UploadDialog = () => {
+  const { uploads, handleUpload } = useUploadSongs()
   const dispatch = useDispatch()
-
-  const uploads = useSelector(selectUploads)
-  const open = useSelector(selectIsUploadModalOpen)
+  const isOpen = useSelector(UploadSongsModalSelectors.selectIsUploadModalOpen)
 
   const inputRef = useRef(null)
   const wrapperRef = useRef(null)
 
   const handleClose = () => {
-    dispatch(closeUploadModal())
+    dispatch(UploadSongsModalActions.closeModal())
   }
 
-  const handleUpload = (event) => {
+  const handleUploadFiles = async (event) => {
+    // convert file list to array
     const files = [...event.target.files]
-    dispatch(handleUploadSong(files))
+    await handleUpload(files)
+    // update songs list
+    dispatch(ManageSongsThunk.getSongs())
   }
 
   const handleUploadButtonClick = () => {
@@ -44,7 +45,7 @@ export const UploadDialog = () => {
   }
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={isOpen} onClose={handleClose}>
       <div className="w-96 p-8 relative">
         {/* modal close button */}
         <button
@@ -72,7 +73,7 @@ export const UploadDialog = () => {
             type="file"
             multiple
             accept="audio/mpeg, audio/mp3"
-            onChange={handleUpload}
+            onChange={handleUploadFiles}
           />
         </div>
         {/* file input */}
